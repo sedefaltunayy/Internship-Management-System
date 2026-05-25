@@ -1,0 +1,351 @@
+﻿@model WebTabanliStajTakipSistemi.Models.Internship
+@using WebTabanliStajTakipSistemi.Enums
+
+@{
+    Layout = "_StudentLayout";
+    ViewData["Title"] = "Staj Belgeleri";
+
+    string alertClass = Model.Status == InternshipStatus.Pending ? "alert-warning" :
+                        Model.Status == InternshipStatus.ApplicationApproved ? "alert-info" :
+                        Model.Status == InternshipStatus.ContractUploaded ? "alert-primary" :
+                        Model.Status == InternshipStatus.Approved ? "alert-success" :
+                        Model.Status == InternshipStatus.Ongoing ? "alert-success" :
+                        Model.Status == InternshipStatus.Completed ? "alert-secondary" :
+                        Model.Status == InternshipStatus.Rejected ? "alert-danger" :
+                        "alert-secondary";
+
+    string alertIcon = Model.Status == InternshipStatus.Pending ? "bi-hourglass-split" :
+                       Model.Status == InternshipStatus.ApplicationApproved ? "bi-info-circle" :
+                       Model.Status == InternshipStatus.ContractUploaded ? "bi-clock" :
+                       Model.Status == InternshipStatus.Approved ? "bi-check-circle" :
+                       Model.Status == InternshipStatus.Ongoing ? "bi-check-circle" :
+                       Model.Status == InternshipStatus.Completed ? "bi-flag" :
+                       Model.Status == InternshipStatus.Rejected ? "bi-x-circle" :
+                       "bi-question-circle";
+
+    string alertTitle = Model.Status == InternshipStatus.Pending ? "Ön Onay Bekleniyor" :
+                        Model.Status == InternshipStatus.ApplicationApproved ? "Sözleşme / Staj Formu Yükleyin" :
+                        Model.Status == InternshipStatus.ContractUploaded ? "Son Onay Bekleniyor" :
+                        Model.Status == InternshipStatus.Approved ? "Staj Onaylandı" :
+                        Model.Status == InternshipStatus.Ongoing ? "Staj Devam Ediyor" :
+                        Model.Status == InternshipStatus.Completed ? "Staj Tamamlandı" :
+                        Model.Status == InternshipStatus.Rejected ? "Başvuru Reddedildi" :
+                        "Bilinmiyor";
+
+    string alertText = Model.Status == InternshipStatus.Pending
+        ? "Akademisyeniniz başvurunuzu henüz ön onaydan geçirmedi."
+        : Model.Status == InternshipStatus.ApplicationApproved
+        ? "Ön onay alındı. Zorunlu staj formunu indirip firmaya imzalatın, ardından sisteme yükleyip danışmanınıza gönderin."
+        : Model.Status == InternshipStatus.ContractUploaded
+        ? "Sözleşmeniz / staj formunuz danışmanınıza gönderildi, son onay bekleniyor."
+        : Model.Status == InternshipStatus.Approved
+        ? "Sözleşmeniz onaylandı. Staj başlangıç tarihiniz bekleniyor."
+        : Model.Status == InternshipStatus.Ongoing
+        ? "Stajınız aktif. Gerekirse izin belgesi yükleyebilirsiniz."
+        : Model.Status == InternshipStatus.Completed
+        ? "Stajınız tamamlandı. Staj defterini yükleyip sorumluya gönderebilirsiniz."
+        : Model.Status == InternshipStatus.Rejected
+        ? "Staj başvurunuz reddedildi."
+        : "";
+
+    bool canDownloadContractForm =
+        Model.Status == InternshipStatus.ApplicationApproved ||
+        Model.Status == InternshipStatus.ContractUploaded ||
+        Model.Status == InternshipStatus.Approved ||
+        Model.Status == InternshipStatus.Ongoing ||
+        Model.Status == InternshipStatus.Completed;
+
+    bool canUploadDiary = Model.Status == InternshipStatus.Completed &&
+                          Model.EndDate.AddDays(30) >= DateTime.Today;
+}
+
+<div class="alert @alertClass rounded-4 border-0 shadow-sm mb-4">
+    <i class="bi @alertIcon me-2"></i>
+    <strong>@alertTitle</strong>
+    <span> - @alertText</span>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-header bg-white py-3 px-4">
+                <h5 class="m-0 fw-bold">Belge Yükle</h5>
+            </div>
+
+            <div class="card-body p-4">
+
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success rounded-3">@TempData["SuccessMessage"]</div>
+                }
+
+                @if (TempData["ErrorMessage"] != null)
+                {
+                    <div class="alert alert-danger rounded-3">@TempData["ErrorMessage"]</div>
+                }
+
+                @if (canDownloadContractForm)
+                {
+                    <div class="alert alert-info rounded-4 border-0 shadow-sm">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2">
+                            <div>
+                                <strong>Zorunlu Staj Formu</strong>
+                                <div class="small">
+                                    Ön onaydan sonra bu formu indirip firmaya imzalatmanız/kaşeletmeniz ve ardından sisteme yüklemeniz gerekir.
+                                </div>
+                            </div>
+
+                            <a asp-action="ContractForm"
+                               asp-route-id="@Model.Id"
+                               target="_blank"
+                               class="btn btn-success rounded-pill px-4">
+                                <i class="bi bi-download me-1"></i> Formu İndir
+                            </a>
+                        </div>
+                    </div>
+                }
+
+                @if (Model.Status == InternshipStatus.ApplicationApproved)
+                {
+                    <p class="text-muted small mb-3">
+                        Zorunlu staj formunu indirip firmaya imzalattıktan sonra buraya yükleyin.
+                        Yükledikten sonra <strong>Danışmana Gönder</strong> butonuna tıklayın.
+                    </p>
+
+                    <form asp-action="UploadDocument" method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" name="internshipId" value="@Model.Id" />
+                        <input type="hidden" name="fileType" value="1" />
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">İmzalı / Kaşeli Zorunlu Staj Formu</label>
+                            <input type="file"
+                                   name="file"
+                                   class="form-control"
+                                   accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                                   required />
+                            <div class="form-text">
+                                PDF, DOC, DOCX, PNG veya JPG formatında yükleyebilirsiniz.
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-upload me-1"></i> Yükle
+                        </button>
+                    </form>
+                }
+                else if (Model.Status == InternshipStatus.Ongoing)
+                {
+                    <p class="text-muted small mb-3">
+                        Gitmediğiniz günler için izin belgesi yükleyebilirsiniz.
+                        İzin belgesi danışmana gönderilmez, bilgi amaçlıdır.
+                    </p>
+
+                    <form asp-action="UploadDocument" method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" name="internshipId" value="@Model.Id" />
+                        <input type="hidden" name="fileType" value="2" />
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">İzin Belgesi</label>
+                            <input type="file"
+                                   name="file"
+                                   class="form-control"
+                                   accept=".pdf,.doc,.docx,.png,.jpg,.jpeg"
+                                   required />
+                            <div class="form-text">
+                                PDF, DOC, DOCX, PNG veya JPG formatında yükleyebilirsiniz.
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-upload me-1"></i> İzin Belgesi Yükle
+                        </button>
+                    </form>
+                }
+                else if (canUploadDiary)
+                {
+                    <p class="text-muted small mb-3">
+                        Staj defterinizi PDF olarak yükleyin. Yükledikten sonra
+                        <strong>Danışmana Gönder</strong> butonuna tıklayın.
+                        Son yükleme tarihi:
+                        <strong>@Model.EndDate.AddDays(30).ToString("dd.MM.yyyy")</strong>
+                    </p>
+
+                    <form asp-action="UploadDocument" method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+
+                        <input type="hidden" name="internshipId" value="@Model.Id" />
+                        <input type="hidden" name="fileType" value="3" />
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Staj Defteri PDF</label>
+                            <input type="file"
+                                   name="file"
+                                   class="form-control"
+                                   accept=".pdf"
+                                   required />
+                            <div class="form-text">
+                                Sadece PDF formatında yükleyiniz.
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-upload me-1"></i> Staj Defteri Yükle
+                        </button>
+                    </form>
+                }
+                else if (Model.Status == InternshipStatus.Completed && !canUploadDiary)
+                {
+                    <div class="alert alert-danger rounded-3 small">
+                        <i class="bi bi-exclamation-triangle me-1"></i>
+                        Staj defteri yükleme süresi doldu.
+                        Son tarih: @Model.EndDate.AddDays(30).ToString("dd.MM.yyyy")
+                    </div>
+                }
+                else
+                {
+                    <div class="text-muted small">
+                        <i class="bi bi-lock me-1"></i>
+                        Şu an belge yükleme aktif değil.
+                    </div>
+                }
+
+                <hr class="my-4" />
+
+                <div class="small text-muted">Staj</div>
+                <div class="fw-semibold">
+                    @Model.Position - @Model.Company?.Name
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-7">
+        <div class="card border-0 shadow-sm rounded-4">
+            <div class="card-header bg-white py-3 px-4">
+                <h5 class="m-0 fw-bold">Yüklenen Belgeler</h5>
+            </div>
+
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Dosya Adı</th>
+                                <th>Tür</th>
+                                <th>Durum</th>
+                                <th class="text-center">İşlem</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @if (Model.InternshipFiles != null && Model.InternshipFiles.Any(f => !f.IsDeleted))
+                            {
+                                foreach (var file in Model.InternshipFiles.Where(f => !f.IsDeleted))
+                                {
+                                    string fileTypeText =
+                                    file.FileType == InternshipFileType.Contract ? "Zorunlu Staj Formu / Sözleşme" :
+                                    file.FileType == InternshipFileType.LeavePermit ? "İzin Belgesi" :
+                                    file.FileType == InternshipFileType.DiaryFinal ? "Staj Defteri" :
+                                    file.FileType == InternshipFileType.Other ? "Diğer" :
+                                    "Bilinmiyor";
+
+                                    string statusBadge =
+                                    file.IsSentToAcademic ? "badge bg-success" : "badge bg-warning text-dark";
+
+                                    string statusText =
+                                    file.IsSentToAcademic ? "Gönderildi" : "Gönderilmedi";
+
+                                    bool canSend =
+                                    !file.IsSentToAcademic &&
+                                    (file.FileType == InternshipFileType.Contract ||
+                                    file.FileType == InternshipFileType.DiaryFinal);
+
+                                    bool canDelete =
+                                    !file.IsSentToAcademic &&
+                                    !(file.FileType == InternshipFileType.Contract && Model.IsContractApproved);
+
+                                    <tr>
+                                        <td>
+                                            <div class="fw-semibold">@file.FileName</div>
+                                            <div class="text-muted" style="font-size:11px;">
+                                                @(Math.Round((double)file.FileSize / 1024, 2)) KB
+                                            </div>
+                                        </td>
+
+                                        <td>@fileTypeText</td>
+
+                                        <td>
+                                            <span class="@statusBadge rounded-pill px-2 py-1" style="font-size:11px;">
+                                                @statusText
+                                            </span>
+
+                                            @if (file.IsSentToAcademic && file.SentToAcademicDate.HasValue)
+                                            {
+                                                <div class="text-muted" style="font-size:10px;">
+                                                    @file.SentToAcademicDate.Value.ToString("dd.MM.yyyy HH:mm")
+                                                </div>
+                                            }
+                                        </td>
+
+                                        <td class="text-center">
+                                            <a href="@file.FilePath"
+                                               target="_blank"
+                                               class="btn btn-sm btn-outline-primary rounded-pill mb-1"
+                                               title="Belgeyi görüntüle">
+                                                <i class="bi bi-eye"></i>
+                                            </a>
+
+                                            @if (canSend)
+                                            {
+                                                <form asp-action="SendToAcademic" method="post" class="d-inline">
+                                                    @Html.AntiForgeryToken()
+
+                                                    <input type="hidden" name="fileId" value="@file.Id" />
+
+                                                    <button type="submit"
+                                                            class="btn btn-sm btn-success rounded-pill mb-1"
+                                                            title="Danışmana gönder"
+                                                            onclick="return confirm('Belgeyi danışmanınıza göndermek istiyor musunuz?')">
+                                                        <i class="bi bi-send"></i>
+                                                    </button>
+                                                </form>
+                                            }
+
+                                            @if (canDelete)
+                                            {
+                                                <form asp-action="DeleteDocument" method="post" class="d-inline">
+                                                    @Html.AntiForgeryToken()
+
+                                                    <input type="hidden" name="fileId" value="@file.Id" />
+
+                                                    <button type="submit"
+                                                            class="btn btn-sm btn-outline-danger rounded-pill mb-1"
+                                                            title="Belgeyi sil"
+                                                            onclick="return confirm('Belgeyi silmek istediğinize emin misiniz?')">
+                                                        <i class="bi bi-trash"></i>
+                                                    </button>
+                                                </form>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="4" class="text-center py-4 text-muted">
+                                        Henüz yüklenmiş belge bulunmuyor.
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

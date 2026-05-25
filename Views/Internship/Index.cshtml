@@ -1,0 +1,129 @@
+﻿@model IEnumerable<WebTabanliStajTakipSistemi.Models.Internship>
+@using WebTabanliStajTakipSistemi.Enums
+
+@{
+    Layout = "_StudentLayout";
+    ViewData["Title"] = "Staj Başvurularım";
+}
+
+@functions {
+    string GetTypeText(InternshipTypes type)
+    {
+        return type switch
+        {
+            InternshipTypes.Summer => "Yaz Stajı",
+            InternshipTypes.LongTime => "Uzun Dönem",
+            InternshipTypes.Optional => "Gönüllü",
+            _ => "Belirsiz"
+        };
+    }
+
+    string GetStatusText(InternshipStatus status)
+    {
+        return status switch
+        {
+            InternshipStatus.Pending => "Ön Onay Bekleniyor",
+            InternshipStatus.ApplicationApproved => "Sözleşme Bekleniyor",
+            InternshipStatus.ContractUploaded => "Son Onay Bekleniyor",
+            InternshipStatus.Approved => "Staj Onaylandı",
+            InternshipStatus.Ongoing => "Devam Ediyor",
+            InternshipStatus.Completed => "Tamamlandı",
+            InternshipStatus.Rejected => "Reddedildi",
+            _ => "Belirsiz"
+        };
+    }
+
+    string GetStatusClass(InternshipStatus status)
+    {
+        return status switch
+        {
+            InternshipStatus.Pending => "bg-warning text-dark",
+            InternshipStatus.ApplicationApproved => "bg-info text-dark",
+            InternshipStatus.ContractUploaded => "bg-primary",
+            InternshipStatus.Approved => "bg-success",
+            InternshipStatus.Ongoing => "bg-success",
+            InternshipStatus.Completed => "bg-secondary",
+            InternshipStatus.Rejected => "bg-danger",
+            _ => "bg-secondary"
+        };
+    }
+}
+
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+    <div class="card-header bg-white py-3 px-4 d-flex justify-content-between align-items-center">
+        <h5 class="m-0 fw-bold">Staj Başvurularım</h5>
+        <a asp-controller="Internship" asp-action="Create" class="btn btn-primary rounded-pill px-4">
+            <i class="bi bi-plus-lg me-1"></i> Yeni Başvuru
+        </a>
+    </div>
+
+    <div class="card-body p-0">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success m-3">@TempData["SuccessMessage"]</div>
+        }
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Pozisyon</th>
+                        <th>Firma</th>
+                        <th>Tür</th>
+                        <th>Durum</th>
+                        <th>Tarih</th>
+                        <th class="text-center">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.Position</td>
+                                <td>@item.Company?.Name</td>
+                                <td>@GetTypeText(item.Types)</td>
+                                <td>
+                                    <span class="badge @GetStatusClass(item.Status)">
+                                        @GetStatusText(item.Status)
+                                    </span>
+                                </td>
+                                <td>
+                                    @item.StartDate.ToString("dd.MM.yyyy") - @item.EndDate.ToString("dd.MM.yyyy")
+                                </td>
+                                <td class="text-center">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-dark rounded-pill">Detay</a>
+
+                                    @if (item.Status == InternshipStatus.ApplicationApproved ||
+                                                                item.Status == InternshipStatus.ContractUploaded ||
+                                                                item.Status == InternshipStatus.Approved ||
+                                                                item.Status == InternshipStatus.Ongoing ||
+                                                                item.Status == InternshipStatus.Completed)
+                                    {
+                                        <a asp-action="ContractForm"
+                                           asp-route-id="@item.Id"
+                                           target="_blank"
+                                           class="btn btn-sm btn-outline-success rounded-pill">
+                                            Formu İndir
+                                        </a>
+                                    }
+
+                                    <a asp-action="Documents" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary rounded-pill">Belgeler</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center py-4 text-muted">
+                                Henüz staj başvurunuz bulunmuyor.
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

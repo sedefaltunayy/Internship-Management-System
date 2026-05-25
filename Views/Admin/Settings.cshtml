@@ -1,0 +1,118 @@
+﻿@model WebTabanliStajTakipSistemi.Models.SystemSettings
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Sistem Ayarları";
+
+    // Mevcut kayıtlı uzantıları diziye çeviriyoruz (AuthorizedFileExtensions)
+    var mevcutUzantilar = Model.AuthorizedFileExtensions?.Split(',', StringSplitOptions.RemoveEmptyEntries).ToList() ?? new List<string>();
+
+    // Standart/Önerilen uzantılar listesi
+    var varsayilanListe = new List<string> { ".pdf", ".jpg", ".jpeg", ".png", ".doc", ".docx", ".zip" };
+
+    // Veritabanındaki farklı uzantıları da listeye dahil et
+    foreach (var item in mevcutUzantilar)
+    {
+        if (!varsayilanListe.Contains(item)) varsayilanListe.Add(item);
+    }
+}
+
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-header bg-white py-3">
+                <h5 class="fw-bold m-0 text-dark"><i class="bi bi-gear-fill me-2"></i> Uygulama Yapılandırması</h5>
+            </div>
+            <div class="card-body p-4">
+                <form asp-action="UpdateSettings" method="post">
+                    @* BaseEntity'den gelen Id *@
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="mb-4">
+                        <label class="form-label fw-bold small">Staj Dönemi Durumu</label>
+                        <div class="form-check form-switch p-3 bg-light rounded-3 border">
+                            <input class="form-check-input ms-0 me-3" type="checkbox" asp-for="IsPeriod">
+                            <label class="form-check-label fw-bold" for="IsPeriod">
+                                @(Model.IsPeriod ? "Şu an staj başvuruları alınabilir." : "Şu an staj başvuruları kapalı.")
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label fw-bold small">Maksimum Dosya Yükleme (KB)</label>
+                            <input asp-for="MaxLoading" class="form-control" placeholder="Örn: 5120">
+                            <span class="text-muted extra-small">1024 KB = 1 MB (Maks: 10240 KB)</span>
+                            <span asp-validation-for="MaxLoading" class="text-danger small d-block"></span>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label class="form-label fw-bold small mb-2">İzin Verilen Uzantılar</label>
+                            <div class="p-3 bg-light rounded-3 border">
+                                <div id="uzantiContainer" class="d-flex flex-wrap gap-3 mb-3">
+                                    @foreach (var uzanti in varsayilanListe)
+                                    {
+                                        <div class="form-check border bg-white rounded px-3 py-1">
+                                            <input class="form-check-input uzanti-checkbox" type="checkbox"
+                                                   value="@uzanti" id="chk_@uzanti"
+                                                   @(mevcutUzantilar.Contains(uzanti) ? "checked" : "")>
+                                            <label class="form-check-label small fw-bold" for="chk_@uzanti">@uzanti</label>
+                                        </div>
+                                    }
+                                </div>
+
+                                @* AuthorizedFileExtensions için gizli input *@
+                                <input type="hidden" asp-for="AuthorizedFileExtensions" id="hiddenUzantilar" />
+
+                                <div class="input-group input-group-sm mt-2" style="max-width: 300px;">
+                                    <input type="text" id="yeniUzantiInput" class="form-control" placeholder=".exe, .rar gibi...">
+                                    <button class="btn btn-outline-primary" type="button" onclick="uzantiEkle()">Ekle</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="border-top pt-3 text-end">
+                        <small class="text-muted me-3">Son Güncelleme: @Model.UpdatedDate.ToString("dd.MM.yyyy HH:mm")</small>
+                        <button type="submit" class="btn btn-dark px-4" onclick="prepareUzantilar()">Değişiklikleri Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // Yeni uzantıyı listeye checkbox olarak ekler
+        function uzantiEkle() {
+            let input = document.getElementById('yeniUzantiInput');
+            let val = input.value.trim().toLowerCase();
+
+            if (val === "") return;
+            if (!val.startsWith('.')) val = '.' + val;
+
+            // Zaten var mı kontrolü
+            if (document.getElementById('chk_' + val)) {
+                alert("Bu uzantı zaten listede mevcut.");
+                return;
+            }
+
+            let container = document.getElementById('uzantiContainer');
+            let div = document.createElement('div');
+            div.className = "form-check border bg-white rounded px-3 py-1";
+            div.innerHTML = `
+                <input class="form-check-input uzanti-checkbox" type="checkbox" value="${val}" id="chk_${val}" checked>
+                <label class="form-check-label small fw-bold" for="chk_${val}">${val}</label>
+            `;
+            container.appendChild(div);
+            input.value = "";
+        }
+
+        // Kaydetmeden önce seçili checkboxları virgülle birleştirip gizli inputa basar
+        function prepareUzantilar() {
+            let checkboxes = document.querySelectorAll('.uzanti-checkbox:checked');
+            let values = Array.from(checkboxes).map(cb => cb.value);
+            document.getElementById('hiddenUzantilar').value = values.join(',');
+        }
+    </script>
+}

@@ -1,0 +1,109 @@
+﻿@model IEnumerable<WebTabanliStajTakipSistemi.Models.Internship>
+@using WebTabanliStajTakipSistemi.Enums
+
+@{
+    Layout = "_AcademicLayout";
+    ViewData["Title"] = "Sözleşme Onayları";
+}
+
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+    <div class="card-header bg-white py-3 px-4 d-flex justify-content-between align-items-center">
+        <div>
+            <h5 class="m-0 fw-bold">Sözleşme Onay Bekleyenler</h5>
+            <small class="text-muted">Öğrenci sözleşme yükledi, son onayınızı bekliyor.</small>
+        </div>
+    </div>
+
+    <div class="card-body p-0">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success m-3">@TempData["SuccessMessage"]</div>
+        }
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Öğrenci</th>
+                        <th>Firma</th>
+                        <th>Staj Türü</th>
+                        <th>Tarihler</th>
+                        <th>Sözleşme</th>
+                        <th class="text-center">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <div class="fw-bold">@item.Student?.FullName</div>
+                                    <div class="text-muted small">@item.Student?.Email</div>
+                                </td>
+                                <td>@item.Company?.Name</td>
+                                <td>
+                                    @(item.Types switch
+                                    {
+                                        InternshipTypes.Summer => "Yaz Stajı",
+                                        InternshipTypes.LongTime => "Uzun Dönem",
+                                        InternshipTypes.Optional => "Gönüllü",
+                                        _ => "Belirsiz"
+                                    })
+                        </td>
+                        <td>
+                            @item.StartDate.ToString("dd.MM.yyyy") -
+                            @item.EndDate.ToString("dd.MM.yyyy")
+                        </td>
+                        <td>
+                            @{
+                                        var contract = item.InternshipFiles?
+                                        .FirstOrDefault(f => f.FileType == WebTabanliStajTakipSistemi.Enums.InternshipFileType.Contract);
+                                    }
+                                    @if (contract != null)
+                                    {
+                                        <a href="@contract.FilePath" target="_blank"
+                                           class="btn btn-sm btn-outline-primary rounded-pill">
+                                            <i class="bi bi-file-earmark-pdf me-1"></i> İncele
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-muted small">Dosya yok</span>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    <form asp-controller="Internship" asp-action="ApproveContract"
+                                          asp-route-id="@item.Id" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-sm btn-success rounded-pill px-3">
+                                            <i class="bi bi-check-lg me-1"></i> Son Onayla
+                                        </button>
+                                    </form>
+                                    <form asp-controller="Internship" asp-action="RejectInternship"
+                                          asp-route-id="@item.Id" method="post" class="d-inline ms-1"
+                                          onsubmit="return confirm('Stajı reddetmek istediğinize emin misiniz?')">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill px-3">
+                                            <i class="bi bi-x-lg me-1"></i> Reddet
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center py-5 text-muted">
+                                <i class="bi bi-check-circle display-4 d-block mb-3 text-success"></i>
+                                Onay bekleyen sözleşme bulunmuyor.
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

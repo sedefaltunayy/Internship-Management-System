@@ -1,0 +1,176 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Staj Portalı</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/WebTabanliStajTakipSistemi.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        :root {
+            --sidebar-bg: #1a2236;
+            --sidebar-hover: #2d3748;
+            --accent-color: #3b82f6;
+        }
+
+        body { overflow-x: hidden; background-color: #f8fafc; font-family: 'Segoe UI', sans-serif; margin: 0; }
+
+        @if (User.IsInRole("Ogrenci"))
+        {
+            <text>
+            #sidebar {
+                min-width: 260px;
+                max-width: 260px;
+                background: var(--sidebar-bg);
+                color: #fff;
+                transition: all 0.3s;
+                min-height: 100vh;
+                position: fixed;
+                z-index: 1000;
+            }
+            #sidebar .sidebar-header { padding: 25px 20px; background: #111827; text-align: center; border-bottom: 1px solid #2d3748; }
+            
+            /* Linklerdeki mavi rengi ve alt çizgiyi temizleyen kritik kısım */
+            #sidebar ul li a {
+                padding: 15px 25px;
+                display: block;
+                color: #cbd5e1 !important;
+                text-decoration: none !important;
+                transition: 0.2s;
+            }
+            #sidebar ul li a:hover { 
+                background: var(--sidebar-hover); 
+                color: #fff !important; 
+                border-left: 4px solid var(--accent-color); 
+            }
+            #sidebar ul li a i { margin-right: 12px; font-size: 1.2rem; }
+            
+            #content { width: 100%; padding-left: 260px; transition: all 0.3s; }
+            .top-navbar { background: #fff; border-bottom: 1px solid #e2e8f0; padding: 12px 30px; position: sticky; top: 0; z-index: 999; }
+            </text>
+        }
+    </style>
+</head>
+<body>
+
+    @if (User.IsInRole("Ogrenci"))
+    {
+        <div class="d-flex">
+            <nav id="sidebar" class="shadow">
+                <div class="sidebar-header">
+                    <h5 class="mb-0 fw-bold text-white">ISUBÜ STAJ</h5>
+                    <small class="text-muted text-uppercase" style="font-size: 10px; letter-spacing: 1px;">Öğrenci Paneli</small>
+                </div>
+
+                <ul class="list-unstyled components mt-3">
+                    <li>
+                        <a asp-controller="Home" asp-action="Index">
+                            <i class="bi bi-grid-1x2-fill"></i> Dashboard
+                        </a>
+                    </li>
+                    <li class="nav-small-cap text-uppercase small mx-4 mt-4 mb-2 text-muted" style="font-size: 11px; font-weight: 700;">Staj İşlemleri</li>
+                    <li>
+                        <a asp-controller="Staj" asp-action="Index">
+                            <i class="bi bi-briefcase-fill"></i> Stajlarım
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Staj" asp-action="Create">
+                            <i class="bi bi-plus-circle-fill"></i> Yeni Başvuru
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="bi bi-journal-text"></i> Staj Günlükleri
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="bi bi-cloud-arrow-down-fill"></i> Belgelerim
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div id="content">
+                <nav class="top-navbar d-flex justify-content-between align-items-center">
+                    <div class="page-title fw-bold text-secondary">
+                        <i class="bi bi-list me-2 d-md-none"></i> Menü
+                    </div>
+                    <div class="user-profile d-flex align-items-center">
+                        <div class="me-3 text-end">
+                            <div class="small fw-bold text-dark">@User.Identity.Name</div>
+                            <span class="badge bg-info text-dark" style="font-size: 10px;">@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value</span>
+                        </div>
+                        <div class="vr mx-3 my-2 text-muted"></div>
+                        <a asp-controller="Account" asp-action="Logout" class="btn btn-sm btn-link text-danger text-decoration-none fw-bold">
+                            <i class="bi bi-box-arrow-right"></i> Çıkış
+                        </a>
+                    </div>
+                </nav>
+
+                <div class="container-fluid p-4">
+                    <main role="main">
+                        @RenderBody()
+                    </main>
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom box-shadow mb-3 py-3">
+                <div class="container">
+                    <a class="navbar-brand fw-bold text-primary" asp-controller="Home" asp-action="Index">ISUBÜ STAJ</a>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                             @if (User.IsInRole("Akademisyen")) {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-controller="Staj" asp-action="OnayBekleyenler">Onay Bekleyenler</a>
+                                </li>
+                             }
+                        </ul>
+                        <ul class="navbar-nav">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item d-flex align-items-center">
+                                    <span class="nav-link text-dark fw-bold">
+                                        <i class="bi bi-person-circle"></i> @User.Identity.Name
+                                        <span class="badge bg-info text-dark ms-1">@User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value</span>
+                                    </span>
+                                    <a class="nav-link text-danger ms-3" asp-controller="Account" asp-action="Logout">Çıkış Yap</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link btn btn-primary text-white px-4" asp-controller="Account" asp-action="Login">Giriş Yap</a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    }
+
+    <footer class="border-top footer text-muted bg-white py-3 mt-auto">
+        <div class="container text-center">
+            &copy; 2026 - WebTabanliStajTakipSistemi - <a asp-controller="Home" asp-action="Privacy">Gizlilik</a>
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

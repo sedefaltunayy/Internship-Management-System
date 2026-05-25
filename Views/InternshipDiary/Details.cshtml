@@ -1,0 +1,286 @@
+﻿@model WebTabanliStajTakipSistemi.Models.InternshipDiary
+@using WebTabanliStajTakipSistemi.Enums
+
+@{
+    Layout = User.IsInRole("Academic") ? "_AcademicLayout" : "_StudentLayout";
+    ViewData["Title"] = "Defter Kaydı Detayı";
+
+    string statusText = Model.Status switch
+    {
+        DiaryStatus.Draft => "Taslak",
+        DiaryStatus.Submitted => "Gönderildi",
+        DiaryStatus.RevisionRequested => "Revizyon İstendi",
+        DiaryStatus.Approved => "Onaylandı",
+        _ => Model.Status.ToString()
+    };
+
+    string statusClass = Model.Status switch
+    {
+        DiaryStatus.Draft => "bg-secondary",
+        DiaryStatus.Submitted => "bg-primary",
+        DiaryStatus.RevisionRequested => "bg-warning text-dark",
+        DiaryStatus.Approved => "bg-success",
+        _ => "bg-dark"
+    };
+}
+
+<style>
+    .detail-wrap {
+        background: linear-gradient(180deg, #eef5ff 0%, #f8fbff 100%);
+        border-radius: 28px;
+        padding: 24px;
+    }
+
+    .detail-hero {
+        background: linear-gradient(135deg, #0f5bd7, #2b82fb 55%, #69a8ff);
+        color: #fff;
+        border-radius: 28px;
+        padding: 32px;
+        box-shadow: 0 20px 40px rgba(43, 130, 251, .25);
+        margin-bottom: 24px;
+    }
+
+    .meta-card,
+    .content-card {
+        background: rgba(255,255,255,.96);
+        border: 1px solid #d9e7ff;
+        border-radius: 24px;
+        box-shadow: 0 12px 28px rgba(15, 91, 215, .08);
+    }
+
+    .paper-content {
+        line-height: 1.9;
+        font-size: 15px;
+        color: #24324b;
+    }
+
+        .paper-content img {
+            max-width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 10px 28px rgba(0,0,0,.10);
+            margin: 14px 0;
+        }
+
+    .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 16px;
+    }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 16px;
+            border: 1px solid #d9e7ff;
+        }
+
+    .comment-item {
+        border: 1px solid #e5efff;
+        background: #f8fbff;
+        border-radius: 18px;
+        padding: 16px;
+        margin-bottom: 12px;
+    }
+
+    .comment-author {
+        font-weight: 800;
+        color: #123d82;
+    }
+
+    .comment-date {
+        font-size: 12px;
+        color: #6b7fa3;
+    }
+
+    .comment-text {
+        margin-top: 8px;
+        color: #24324b;
+        white-space: pre-wrap;
+    }
+
+    .action-btn {
+        border-radius: 999px;
+        font-weight: 700;
+        padding-left: 18px;
+        padding-right: 18px;
+    }
+</style>
+
+<div class="detail-wrap">
+    <div class="detail-hero">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+            <div>
+                <div class="small fw-bold text-uppercase mb-2 opacity-75">Staj Defteri</div>
+                <h2 class="fw-bold mb-2">@Model.Title</h2>
+                <div class="opacity-75">
+                    @Model.Student?.FullName • @Model.WorkDate.ToString("dd.MM.yyyy") • @statusText
+                </div>
+            </div>
+
+            <div class="d-flex gap-2 flex-wrap">
+                @if (User.IsInRole("Academic"))
+                {
+                    <a asp-controller="Academic" asp-action="DiaryReviews" class="btn btn-light rounded-pill px-4">
+                        Listeye Dön
+                    </a>
+                }
+                else
+                {
+                    <a asp-action="Index" class="btn btn-light rounded-pill px-4">
+                        Geri Dön
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success rounded-4">@TempData["SuccessMessage"]</div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger rounded-4">@TempData["ErrorMessage"]</div>
+    }
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-3">
+            <div class="meta-card p-4 h-100">
+                <div class="small text-muted">Öğrenci</div>
+                <div class="fw-semibold">@Model.Student?.FullName</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="meta-card p-4 h-100">
+                <div class="small text-muted">Staj</div>
+                <div class="fw-semibold">@Model.Internship?.Position</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="meta-card p-4 h-100">
+                <div class="small text-muted">Tarih</div>
+                <div class="fw-semibold">@Model.WorkDate.ToString("dd.MM.yyyy")</div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="meta-card p-4 h-100">
+                <div class="small text-muted">Durum</div>
+                <span class="badge @statusClass rounded-pill px-3 py-2">@statusText</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-card p-4 p-lg-5">
+        <h4 class="fw-bold mb-3 text-primary">Günlük İçeriği</h4>
+        <div class="paper-content">
+            @Html.Raw(Model.Content)
+        </div>
+    </div>
+
+    @if (Model.DiaryFiles != null && Model.DiaryFiles.Any(f => !f.IsDeleted))
+    {
+        <div class="content-card p-4 p-lg-5 mt-4">
+            <h4 class="fw-bold mb-3">Eklenen Görseller</h4>
+            <div class="gallery-grid">
+                @foreach (var image in Model.DiaryFiles.Where(f => !f.IsDeleted))
+                {
+                    <a href="@image.FilePath" target="_blank">
+                        <img src="@image.FilePath" alt="@image.FileName" />
+                    </a>
+                }
+            </div>
+        </div>
+    }
+
+    <div class="content-card p-4 p-lg-5 mt-4">
+        <h4 class="fw-bold mb-3 text-primary">Akademisyen Yorumları</h4>
+
+        @if (Model.Comments != null && Model.Comments.Any(c => !c.IsDeleted))
+        {
+            @foreach (var comment in Model.Comments.Where(c => !c.IsDeleted).OrderByDescending(c => c.CreatedDate))
+            {
+                <div class="comment-item">
+                    <div class="d-flex justify-content-between flex-wrap gap-2">
+                        <div class="comment-author">
+                            @(comment.Academic?.FullName ?? "Akademisyen")
+                        </div>
+                        <div class="comment-date">
+                            @comment.CreatedDate.ToString("dd.MM.yyyy HH:mm")
+                        </div>
+                    </div>
+                    <div class="comment-text">@comment.Description</div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="text-muted">Henüz yorum bulunmuyor.</div>
+        }
+    </div>
+
+    @if (User.IsInRole("Academic"))
+    {
+        <div class="content-card p-4 p-lg-5 mt-4">
+            <h4 class="fw-bold mb-3 text-primary">Akademisyen İşlemleri</h4>
+
+            <form asp-controller="InternshipDiary" asp-action="AddComment" method="post" class="mb-4">
+                @Html.AntiForgeryToken()
+                <input type="hidden" name="diaryId" value="@Model.Id" />
+
+                <label class="form-label fw-bold">Yorum Ekle</label>
+                <textarea name="description" class="form-control rounded-4" rows="4"
+                      placeholder="Öğrenciye açıklama, düzeltme veya öneri yazabilirsiniz."></textarea>
+
+                <button type="submit" class="btn btn-outline-primary action-btn mt-3">
+                    <i class="bi bi-chat-left-text me-1"></i> Yorumu Kaydet
+                </button>
+            </form>
+
+            @if (Model.Status == DiaryStatus.Submitted || Model.Status == DiaryStatus.RevisionRequested)
+            {
+                <div class="row g-3">
+                    <div class="col-lg-6">
+                        <form asp-controller="InternshipDiary" asp-action="Approve" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@Model.Id" />
+                            <button type="submit" class="btn btn-success action-btn w-100">
+                                <i class="bi bi-check2-circle me-1"></i> Günlüğü Onayla
+                            </button>
+                        </form>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <form asp-controller="InternshipDiary" asp-action="RequestRevision" method="post">
+                            @Html.AntiForgeryToken()
+                            <input type="hidden" name="id" value="@Model.Id" />
+
+                            <textarea name="revisionComment" class="form-control rounded-4 mb-2" rows="3"
+                              placeholder="Revizyon sebebini yazın. Örn: 2. paragrafı daha ayrıntılı açıklayın."></textarea>
+
+                            <button type="submit" class="btn btn-warning action-btn w-100">
+                                <i class="bi bi-arrow-repeat me-1"></i> Revizyon İste
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+            else if (Model.Status == DiaryStatus.Approved)
+            {
+                <div class="alert alert-success rounded-4 mb-0">
+                    Bu günlük onaylanmıştır.
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-secondary rounded-4 mb-0">
+                    Bu kayıt henüz öğrenci tarafından incelemeye gönderilmemiş.
+                </div>
+            }
+        </div>
+    }
+</div>

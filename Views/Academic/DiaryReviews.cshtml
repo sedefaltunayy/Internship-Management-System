@@ -1,0 +1,230 @@
+﻿@model IEnumerable<WebTabanliStajTakipSistemi.Models.InternshipDiary>
+@using WebTabanliStajTakipSistemi.Enums
+
+@{
+    Layout = "_AcademicLayout";
+    ViewData["Title"] = "Günlük İncelemeleri";
+
+    var studentOptions = ViewBag.StudentOptions as IEnumerable<dynamic>;
+    int? selectedStudentId = ViewBag.SelectedStudentId as int?;
+    DiaryStatus? selectedStatus = ViewBag.SelectedStatus as DiaryStatus?;
+}
+
+<style>
+    .diary-shell {
+        background: linear-gradient(180deg, #f6f3ff 0%, #fbfaff 100%);
+        border-radius: 30px;
+        padding: 24px;
+    }
+
+    .diary-hero {
+        background: linear-gradient(135deg, #7c2d12 0%, #f97316 55%, #fdba74 100%);
+        color: #fff;
+        border-radius: 28px;
+        padding: 30px;
+        box-shadow: 0 20px 42px rgba(249, 115, 22, 0.20);
+        margin-bottom: 24px;
+    }
+
+    .filter-card,
+    .diary-card {
+        background: rgba(255,255,255,.97);
+        border: 1px solid #ffedd5;
+        border-radius: 24px;
+        box-shadow: 0 12px 30px rgba(31, 41, 55, 0.06);
+        overflow: hidden;
+    }
+
+    .filter-card {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .diary-row {
+        padding: 22px 24px;
+        border-bottom: 1px solid #fff1e6;
+    }
+
+        .diary-row:last-child {
+            border-bottom: 0;
+        }
+
+    .status-pill {
+        border-radius: 999px;
+        padding: 8px 12px;
+        font-size: 12px;
+        font-weight: 800;
+    }
+
+    .action-btn {
+        border-radius: 999px;
+        font-weight: 700;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+</style>
+
+<div class="diary-shell">
+    <div class="diary-hero">
+        <div class="small text-uppercase fw-bold opacity-75 mb-2">Defter Değerlendirme</div>
+        <h2 class="fw-bold mb-2">Öğrenci Günlük İncelemeleri</h2>
+        <div class="opacity-75">
+            Gönderilen günlük kayıtlarını incele, yorum yap, onayla veya revizyon iste.
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success rounded-4">@TempData["SuccessMessage"]</div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger rounded-4">@TempData["ErrorMessage"]</div>
+    }
+
+    <div class="filter-card">
+        <form asp-controller="Academic" asp-action="DiaryReviews" method="get">
+            <div class="row g-3 align-items-end">
+                <div class="col-md-5">
+                    <label class="form-label fw-bold">Öğrenciye Göre Filtrele</label>
+                    <select name="studentId" class="form-select rounded-4">
+                        <option value="">Tüm öğrenciler</option>
+                        @if (studentOptions != null)
+                        {
+                            foreach (var student in studentOptions)
+                            {
+                                if (selectedStudentId.HasValue && selectedStudentId.Value == student.Id)
+                                {
+                                    <option value="@student.Id" selected>@student.Name</option>
+                                }
+                                else
+                                {
+                                    <option value="@student.Id">@student.Name</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-4">
+                    <label class="form-label fw-bold">Duruma Göre Filtrele</label>
+                    <select name="status" class="form-select rounded-4">
+                        <option value="">Tüm durumlar</option>
+
+                        @if (selectedStatus == DiaryStatus.Submitted)
+                        {
+                            <option value="@DiaryStatus.Submitted" selected>Gönderildi</option>
+                        }
+                        else
+                        {
+                            <option value="@DiaryStatus.Submitted">Gönderildi</option>
+                        }
+
+                        @if (selectedStatus == DiaryStatus.RevisionRequested)
+                        {
+                            <option value="@DiaryStatus.RevisionRequested" selected>Revizyon İstendi</option>
+                        }
+                        else
+                        {
+                            <option value="@DiaryStatus.RevisionRequested">Revizyon İstendi</option>
+                        }
+
+                        @if (selectedStatus == DiaryStatus.Approved)
+                        {
+                            <option value="@DiaryStatus.Approved" selected>Onaylandı</option>
+                        }
+                        else
+                        {
+                            <option value="@DiaryStatus.Approved">Onaylandı</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="col-md-3 d-flex gap-2">
+                    <button type="submit" class="btn btn-primary action-btn w-100">
+                        <i class="bi bi-funnel me-1"></i> Filtrele
+                    </button>
+
+                    <a asp-controller="Academic" asp-action="DiaryReviews" class="btn btn-outline-secondary action-btn">
+                        Temizle
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="diary-card">
+        @if (Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                var statusClass =
+                item.Status == DiaryStatus.Submitted ? "bg-primary text-white" :
+                item.Status == DiaryStatus.RevisionRequested ? "bg-warning text-dark" :
+                item.Status == DiaryStatus.Approved ? "bg-success text-white" :
+                "bg-secondary text-white";
+
+                var statusText = item.Status switch
+                {
+                    DiaryStatus.Submitted => "Gönderildi",
+                    DiaryStatus.RevisionRequested => "Revizyon İstendi",
+                    DiaryStatus.Approved => "Onaylandı",
+                    _ => item.Status.ToString()
+                };
+
+                <div class="diary-row">
+                    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+                        <div>
+                            <h5 class="fw-bold mb-1">@item.Title</h5>
+                            <div class="text-muted small mb-2">
+                                @item.Student?.FullName • @item.WorkDate.ToString("dd.MM.yyyy")
+                            </div>
+                            <div class="small text-muted">
+                                Staj: @item.Internship?.Position
+                                @if (!string.IsNullOrWhiteSpace(item.Internship?.Company?.Name))
+                                {
+                                    <span> • Firma: @item.Internship.Company.Name</span>
+                                }
+                            </div>
+                            <div class="small text-muted mt-1">
+                                Yorum sayısı: @(item.Comments?.Count(c => !c.IsDeleted) ?? 0)
+                            </div>
+                        </div>
+
+                        <div class="text-end">
+                            <span class="status-pill @statusClass">@statusText</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-3 d-flex flex-wrap gap-2">
+                        <a asp-controller="InternshipDiary"
+                           asp-action="Details"
+                           asp-route-id="@item.Id"
+                           class="btn btn-outline-dark action-btn">
+                            <i class="bi bi-eye me-1"></i> Detay / Yorum
+                        </a>
+
+                        @if (item.Status == DiaryStatus.Submitted || item.Status == DiaryStatus.RevisionRequested)
+                        {
+                            <form asp-controller="InternshipDiary" asp-action="Approve" method="post" class="d-inline">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <button type="submit" class="btn btn-success action-btn">
+                                    <i class="bi bi-check2-circle me-1"></i> Onayla
+                                </button>
+                            </form>
+                        }
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="p-5 text-center text-muted">
+                <i class="bi bi-journal-text display-5 d-block mb-3 text-warning"></i>
+                Seçilen filtreye uygun günlük kaydı bulunmuyor.
+            </div>
+        }
+    </div>
+</div>

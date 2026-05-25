@@ -1,0 +1,174 @@
+﻿@model IEnumerable<WebTabanliStajTakipSistemi.Models.Student>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Öğrenci Listesi";
+}
+
+<style>
+    /* Arama Kutusu Animasyonu */
+    .search-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .search-input {
+        width: 0;
+        height: 40px;
+        padding: 0;
+        padding-left: 10px;
+        border: 1px solid transparent;
+        border-radius: 20px;
+        outline: none;
+        transition: all 0.4s ease;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+        .search-input.active {
+            width: 250px;
+            padding-left: 40px;
+            padding-right: 15px;
+            opacity: 1;
+            border-color: #3b82f6;
+            cursor: text;
+        }
+
+    .search-btn {
+        width: 40px;
+        height: 40px;
+        background: #fff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        position: absolute;
+        right: 0;
+        z-index: 10;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        border: 1px solid #e5e7eb;
+    }
+
+        .search-btn.active {
+            right: 215px;
+            background: transparent;
+            border-color: transparent;
+            box-shadow: none;
+        }
+
+        .search-btn i {
+            font-size: 1.2rem;
+            color: #6b7280;
+        }
+</style>
+
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+    <div class="card-header bg-white py-4 px-4 border-0">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h4 class="m-0 fw-bold text-dark"><i class="bi bi-people me-2 text-primary"></i> Öğrenci Yönetimi</h4>
+                <p class="text-muted small mb-0">Toplam <strong id="studentCount">@Model.Count()</strong> öğrenci listeleniyor.</p>
+            </div>
+            <div class="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0">
+                <div class="search-wrapper">
+                    <div class="search-btn" id="searchBtn">
+                        <i class="bi bi-search"></i>
+                    </div>
+                    <input type="text" id="liveSearch" class="search-input" placeholder="Öğrenci no veya isim yazın...">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" id="studentTable">
+                <thead class="bg-light">
+                    <tr class="text-muted small text-uppercase">
+                        <th class="ps-4">Öğrenci No</th>
+                        <th>Ad Soyad</th>
+                        <th>Bölüm</th>
+                        <th>E-Posta</th>
+                        <th class="text-center">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="student-row">
+                            <td class="ps-4 fw-bold search-target-no">@item.StudentNumber</td>
+                            <td class="search-target-name">
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-primary bg-opacity-10 text-primary p-2 me-2 d-none d-md-block" style="width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">
+                                        @(string.IsNullOrEmpty(item.FullName) ? "?" : item.FullName.Substring(0, 1).ToUpper())
+                                    </div>
+                                    @item.FullName
+                                </div>
+                            </td>
+                            <td><span class="badge bg-light text-dark border fw-normal">@(item.Department?.Name ?? "Atanmamış")</span></td>
+                            <td class="text-muted small">@item.Email</td>
+                            <td class="text-center">
+                                <form asp-action="DeleteUser" asp-route-id="@item.Id" asp-route-type="Student" method="post"
+                                      onsubmit="return confirm('Bu öğrenciyi silmek istediğinize emin misiniz?')">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger border-0 rounded-pill px-3">
+                                        <i class="bi bi-trash3 me-1"></i> Sil
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="noResult" class="text-center py-5 d-none">
+            <i class="bi bi-search text-muted display-1"></i>
+            <p class="mt-3 text-muted">Aradığınız kriterlere uygun öğrenci bulunamadı.</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            const searchBtn = $('#searchBtn');
+            const searchInput = $('#liveSearch');
+
+            searchBtn.on('click', function () {
+                searchBtn.toggleClass('active');
+                searchInput.toggleClass('active');
+                if (searchInput.hasClass('active')) {
+                    searchInput.focus();
+                } else {
+                    searchInput.val('');
+                    filterTable('');
+                }
+            });
+
+            searchInput.on('keyup', function () {
+                const value = $(this).val().toLowerCase();
+                filterTable(value);
+            });
+
+            function filterTable(value) {
+                let visibleCount = 0;
+                $(".student-row").filter(function () {
+                    const match = $(this).text().toLowerCase().indexOf(value) > -1;
+                    $(this).toggle(match);
+                    if (match) visibleCount++;
+                });
+
+                $("#studentCount").text(visibleCount);
+                if (visibleCount === 0) {
+                    $("#studentTable").addClass('d-none');
+                    $("#noResult").removeClass('d-none');
+                } else {
+                    $("#studentTable").removeClass('d-none');
+                    $("#noResult").addClass('d-none');
+                }
+            }
+        });
+    </script>
+}

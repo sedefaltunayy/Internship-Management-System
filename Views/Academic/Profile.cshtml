@@ -1,0 +1,198 @@
+﻿@model WebTabanliStajTakipSistemi.Models.Academic
+
+@{
+    Layout = "_AcademicLayout";
+    ViewData["Title"] = "Profilim";
+}
+
+<style>
+    .profile-shell {
+        background: linear-gradient(180deg, #f6f3ff 0%, #fbfaff 100%);
+        border-radius: 30px;
+        padding: 24px;
+    }
+
+    .profile-hero {
+        background: linear-gradient(135deg, #34215d 0%, #6d46d6 55%, #a78bfa 100%);
+        color: #fff;
+        border-radius: 28px;
+        padding: 32px;
+        box-shadow: 0 20px 42px rgba(109, 70, 214, 0.22);
+        margin-bottom: 24px;
+    }
+
+    .profile-card {
+        background: rgba(255,255,255,.96);
+        border: 1px solid #ece7ff;
+        border-radius: 26px;
+        box-shadow: 0 12px 30px rgba(31, 41, 55, 0.06);
+        overflow: hidden;
+    }
+
+    .avatar-box {
+        width: 92px;
+        height: 92px;
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255,255,255,.16);
+        border: 1px solid rgba(255,255,255,.18);
+        font-size: 36px;
+    }
+
+    .soft-info {
+        background: linear-gradient(180deg, #faf7ff 0%, #f4efff 100%);
+        border: 1px solid #e9defe;
+        border-radius: 22px;
+        padding: 20px;
+        height: 100%;
+    }
+
+    .mini-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: .6px;
+        color: #7c6aa6;
+        font-weight: 800;
+        margin-bottom: 6px;
+    }
+
+    .mini-value {
+        font-size: 16px;
+        font-weight: 800;
+        color: #2f2646;
+    }
+
+    .form-label {
+        font-weight: 700;
+        color: #3d3160;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        min-height: 52px;
+        border-radius: 16px;
+        border: 1px solid #ddd6fe;
+        box-shadow: none !important;
+    }
+
+        .form-control:focus {
+            border-color: #8b5cf6;
+            box-shadow: 0 0 0 .2rem rgba(139,92,246,.12) !important;
+        }
+
+    .save-btn {
+        border-radius: 999px;
+        font-weight: 800;
+        padding: 12px 24px;
+    }
+</style>
+
+<div class="profile-shell">
+    <div class="profile-hero">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+            <div class="d-flex align-items-center gap-3">
+                <div class="avatar-box">
+                    <i class="bi bi-person-workspace"></i>
+                </div>
+                <div>
+                    <div class="small text-uppercase fw-bold opacity-75 mb-1">Akademisyen Profili</div>
+                    <h2 class="fw-bold mb-1">@Model.FullName</h2>
+                    <div class="opacity-75">
+                        @(string.IsNullOrWhiteSpace(Model.Title) ? "Unvan bilgisi girilmemiş" : Model.Title)
+                    </div>
+                </div>
+            </div>
+
+            <div class="badge rounded-pill px-3 py-2" style="background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.18);">
+                <i class="bi bi-shield-check me-1"></i> Akademisyen Hesabı
+            </div>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success rounded-4 border-0 shadow-sm">@TempData["SuccessMessage"]</div>
+    }
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="soft-info">
+                <div class="mini-label">Sicil Numarası</div>
+                <div class="mini-value">@Model.AcademicNumber</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="soft-info">
+                <div class="mini-label">Üniversite</div>
+                <div class="mini-value">@Model.University?.Name</div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="soft-info">
+                <div class="mini-label">Bölüm</div>
+                <div class="mini-value">@Model.Department?.Name</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="profile-card">
+        <div class="card-body p-4 p-lg-5">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <h4 class="fw-bold mb-1">Hesap Bilgilerini Güncelle</h4>
+                    <div class="text-muted">Ad soyad, unvan, e-posta ve parolanı bu alandan güncelleyebilirsin.</div>
+                </div>
+            </div>
+
+            <form asp-action="Profile" method="post">
+                @Html.AntiForgeryToken()
+                <input asp-for="Id" type="hidden" />
+                <input asp-for="DepartmentId" type="hidden" />
+                <input asp-for="UniversityId" type="hidden" />
+                <input asp-for="AcademicNumber" type="hidden" />
+
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <label asp-for="FullName" class="form-label">Ad Soyad</label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Title" class="form-label">Unvan</label>
+                        <input asp-for="Title" class="form-control" placeholder="Örn: Dr. Öğr. Üyesi" />
+                        <span asp-validation-for="Title" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label">E-posta Adresi</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Password" class="form-label">Yeni Parola</label>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Değiştirmek istemiyorsan boş bırak" />
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-end mt-4">
+                    <button type="submit" class="btn btn-primary save-btn">
+                        <i class="bi bi-check2-circle me-1"></i> Bilgileri Güncelle
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

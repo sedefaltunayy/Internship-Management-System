@@ -1,0 +1,37 @@
+﻿@model WebTabanliStajTakipSistemi.Models.University
+
+@{
+    ViewData["Title"] = "Yeni Üniversite Ekle";
+}
+
+<div class="container mt-4">
+    <div class="card shadow border-0">
+        <div class="card-header bg-success text-white py-3">
+            <h5 class="mb-0"><i class="bi bi-bank me-2"></i> Yeni Üniversite Ekle</h5>
+        </div>
+        <div class="card-body p-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <form asp-action="Create">
+                        @Html.AntiForgeryToken()
+                        <div class="form-group mb-3">
+                            <label asp-for="Name" class="control-label fw-bold small text-uppercase">Üniversite Adı</label>
+                            <input asp-for="Name" class="form-control" placeholder="Örn: Isparta Uygulamalı Bilimler Üniversitesi" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="mt-4">
+                            <button type="submit" class="btn btn-success px-4">Kaydet</button>
+                            <a asp-action="Index" class="btn btn-secondary px-4">Geri Dön</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

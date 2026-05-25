@@ -1,0 +1,125 @@
+﻿@model IEnumerable<WebTabanliStajTakipSistemi.Models.InternshipDiary>
+@using WebTabanliStajTakipSistemi.Enums
+
+@{
+    Layout = "_StudentLayout";
+    ViewData["Title"] = "Staj Defteri";
+}
+
+<style>
+    .page-shell {
+        background: linear-gradient(180deg, #eef5ff 0%, #f8fbff 100%);
+        border-radius: 28px;
+        padding: 24px;
+    }
+
+    .hero-strip {
+        background: linear-gradient(135deg, #0f5bd7, #2b82fb 55%, #69a8ff);
+        color: #fff;
+        border-radius: 28px;
+        padding: 28px 32px;
+        box-shadow: 0 20px 40px rgba(43,130,251,.25);
+        margin-bottom: 24px;
+    }
+
+    .main-card {
+        background: rgba(255,255,255,.97);
+        border: 1px solid #d9e7ff;
+        border-radius: 24px;
+        box-shadow: 0 12px 28px rgba(15,91,215,.08);
+        overflow: hidden;
+    }
+</style>
+
+<div class="page-shell">
+    <div class="hero-strip d-flex justify-content-between align-items-center flex-wrap gap-3">
+        <div>
+            <div class="small fw-bold text-uppercase mb-2 opacity-75">Staj Defteri</div>
+            <h2 class="fw-bold mb-1">Günlük Kayıtların</h2>
+            <div class="opacity-75">Kayıt oluştur, düzenle, gönder ve takip et.</div>
+        </div>
+
+        <a asp-controller="InternshipDiary" asp-action="Create" class="btn btn-light text-primary rounded-pill px-4 fw-bold">
+            <i class="bi bi-plus-lg me-1"></i> Yeni Kayıt
+        </a>
+    </div>
+
+    <div class="main-card">
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="alert alert-success m-3">@TempData["SuccessMessage"]</div>
+        }
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger m-3">@TempData["ErrorMessage"]</div>
+        }
+
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>Tarih</th>
+                        <th>Başlık</th>
+                        <th>Durum</th>
+                        <th>Görsel</th>
+                        <th>Staj</th>
+                        <th class="text-center">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.WorkDate.ToString("dd.MM.yyyy")</td>
+                                <td>
+                                    <div class="fw-semibold">@item.Title</div>
+                                </td>
+                                <td>
+                                    <span class="badge
+                                                @(item.Status == DiaryStatus.Draft ? "bg-secondary" :
+                                                                                    item.Status == DiaryStatus.Submitted ? "bg-primary" :
+                                                                                    item.Status == DiaryStatus.RevisionRequested ? "bg-warning text-dark" :
+                                                                                    item.Status == DiaryStatus.Approved ? "bg-success" :
+                                                                                    "bg-dark")">
+                                @item.Status
+                            </span>
+                        </td>
+                        <td>@(item.DiaryFiles?.Count(f => !f.IsDeleted) ?? 0)</td>
+                        <td>@item.Internship?.Position</td>
+                        <td class="text-center">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-dark rounded-pill">Detay</a>
+
+                            @if (item.Status == DiaryStatus.Draft || item.Status == DiaryStatus.RevisionRequested)
+                                    {
+                                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-primary rounded-pill">Düzenle</a>
+
+                                        <form asp-action="Submit" method="post" class="d-inline">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit" class="btn btn-sm btn-outline-success rounded-pill">Gönder</button>
+                                        </form>
+
+                                        <form asp-action="Delete" method="post" class="d-inline">
+                                            @Html.AntiForgeryToken()
+                                            <input type="hidden" name="id" value="@item.Id" />
+                                            <button type="submit" class="btn btn-sm btn-outline-danger rounded-pill">Sil</button>
+                                        </form>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="6" class="text-center py-5 text-muted">Henüz staj defteri kaydı bulunmuyor.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

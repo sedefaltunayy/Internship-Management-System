@@ -1,0 +1,193 @@
+﻿@model IEnumerable<WebTabanliStajTakipSistemi.Models.Company>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Firma Yönetimi";
+}
+
+<style>
+    /* Arama Kutusu Animasyonu */
+    .search-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .search-input {
+        width: 0;
+        height: 40px;
+        padding: 0;
+        padding-left: 10px;
+        border: 1px solid transparent;
+        border-radius: 20px;
+        outline: none;
+        transition: all 0.4s ease;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+        .search-input.active {
+            width: 250px;
+            padding-left: 40px;
+            padding-right: 15px;
+            opacity: 1;
+            border-color: #3b82f6;
+            cursor: text;
+        }
+
+    .search-btn {
+        width: 40px;
+        height: 40px;
+        background: #fff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        position: absolute;
+        right: 0;
+        z-index: 10;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        border: 1px solid #e5e7eb;
+    }
+
+        .search-btn.active {
+            right: 215px;
+            background: transparent;
+            border-color: transparent;
+            box-shadow: none;
+        }
+
+        .search-btn i {
+            font-size: 1.2rem;
+            color: #6b7280;
+        }
+</style>
+
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+    <div class="card-header bg-white py-4 px-4 border-0">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h4 class="m-0 fw-bold text-dark">
+                    <i class="bi bi-building me-2 text-primary"></i> Kayıtlı Firma Havuzu
+                </h4>
+                <p class="text-muted small mb-0">
+                    Sistemde kayıtlı <strong id="companyCount">@Model.Count()</strong> firma bulunuyor.
+                </p>
+            </div>
+            <div class="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0">
+                <div class="search-wrapper">
+                    <div class="search-btn" id="searchBtn">
+                        <i class="bi bi-search"></i>
+                    </div>
+                    <input type="text" id="liveSearch" class="search-input" placeholder="Firma adı veya vergi no yazın...">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" id="companyTable">
+                <thead class="bg-light text-muted small text-uppercase">
+                    <tr>
+                        <th class="ps-4">Firma Bilgisi / Vergi No</th>
+                        <th>Adres</th>
+                        <th>Yetkili Kişi</th>
+                        <th>İletişim / Web</th>
+                        <th class="text-center">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="company-row">
+                            <td class="ps-4">
+                                <div class="fw-bold text-dark text-truncate" style="max-width: 200px;">@item.Name</div>
+                                <div class="badge bg-secondary bg-opacity-10 text-secondary extra-small" style="font-size: 10px;">
+                                    VN: @item.TaxNumber
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-muted small text-wrap" style="max-width: 250px;">
+                                    <i class="bi bi-geo-alt me-1 text-primary"></i>@item.Address
+                                </div>
+                            </td>
+                            <td>
+                                <div class="small fw-bold text-dark">@item.CompanyRepresentative</div>
+                                <div class="small text-muted" style="font-size: 11px;">Firma Temsilcisi</div>
+                            </td>
+                            <td>
+                                <div class="small mb-1"><i class="bi bi-envelope me-1 text-primary"></i> @item.Email</div>
+                                <div class="small mb-1"><i class="bi bi-telephone me-1 text-primary"></i> @item.Phone</div>
+                                <div class="extra-small text-truncate" style="max-width: 150px; font-size: 11px;">
+                                    <a href="@item.WebAddress" target="_blank" class="text-decoration-none">
+                                        <i class="bi bi-link-45deg"></i> @item.WebAddress
+                                    </a>
+                                </div>
+                            </td>
+                            <td class="text-center">
+                                <form asp-action="DeleteUser" asp-route-id="@item.Id" asp-route-type="Company" method="post"
+                                      onsubmit="return confirm('@item.Name firmasını sistemden kaldırmak istediğinize emin misiniz?')">
+                                    <button type="submit" class="btn btn-sm btn-outline-danger border-0 rounded-pill px-3">
+                                        <i class="bi bi-trash3 me-1"></i> Kaldır
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        @* Sonuç Bulunamadı *@
+        <div id="noResult" class="text-center py-5 d-none">
+            <i class="bi bi-building-exclamation text-muted display-1"></i>
+            <p class="mt-3 text-muted">Aranan kriterlere uygun firma kaydı bulunamadı.</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            const searchBtn = $('#searchBtn');
+            const searchInput = $('#liveSearch');
+
+            searchBtn.on('click', function () {
+                searchBtn.toggleClass('active');
+                searchInput.toggleClass('active');
+                if (searchInput.hasClass('active')) {
+                    searchInput.focus();
+                } else {
+                    searchInput.val('');
+                    filterTable('');
+                }
+            });
+
+            searchInput.on('keyup', function () {
+                const value = $(this).val().toLowerCase();
+                filterTable(value);
+            });
+
+            function filterTable(value) {
+                let visibleCount = 0;
+                $(".company-row").filter(function () {
+                    const match = $(this).text().toLowerCase().indexOf(value) > -1;
+                    $(this).toggle(match);
+                    if (match) visibleCount++;
+                });
+
+                $("#companyCount").text(visibleCount);
+                if (visibleCount === 0) {
+                    $("#companyTable").addClass('d-none');
+                    $("#noResult").removeClass('d-none');
+                } else {
+                    $("#companyTable").removeClass('d-none');
+                    $("#noResult").addClass('d-none');
+                }
+            }
+        });
+    </script>
+}

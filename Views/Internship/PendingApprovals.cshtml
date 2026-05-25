@@ -1,0 +1,295 @@
+﻿@model IEnumerable<WebTabanliStajTakipSistemi.Models.Internship>
+@using WebTabanliStajTakipSistemi.Enums
+
+@{
+    Layout = "_AcademicLayout";
+    ViewData["Title"] = "Bekleyen Onaylar";
+}
+
+@functions {
+    string GetTypeText(InternshipTypes type)
+    {
+        return type switch
+        {
+            InternshipTypes.Summer => "Yaz Stajı",
+            InternshipTypes.LongTime => "Uzun Dönem",
+            InternshipTypes.Optional => "Gönüllü",
+            _ => "Belirsiz"
+        };
+    }
+
+    string GetStatusText(WebTabanliStajTakipSistemi.Models.Internship item)
+    {
+        if (item.Status == InternshipStatus.Pending)
+            return "Ön Onay Bekliyor";
+
+        if (item.Status == InternshipStatus.ApplicationApproved)
+            return "Öğrenciden Sözleşme Bekleniyor";
+
+        if (item.Status == InternshipStatus.ContractUploaded)
+            return "Sözleşme Onayı Bekliyor";
+
+        if (item.Status == InternshipStatus.Approved)
+            return "Staj Onaylandı";
+
+        if (item.Status == InternshipStatus.Ongoing)
+            return "Devam Ediyor";
+
+        if (item.Status == InternshipStatus.Completed)
+            return "Tamamlandı";
+
+        if (item.Status == InternshipStatus.Rejected)
+            return "Reddedildi";
+
+        return "Bilinmiyor";
+    }
+
+    string GetStatusClass(WebTabanliStajTakipSistemi.Models.Internship item)
+    {
+        if (!item.IsApplicationApproved)
+            return "bg-warning text-dark";
+
+        if (item.ContractUploadedDate != null && !item.IsContractApproved)
+            return "bg-info text-dark";
+
+        if (item.IsApplicationApproved && item.ContractUploadedDate == null)
+            return "bg-secondary";
+
+        return "bg-dark";
+    }
+}
+
+<style>
+    .approval-shell {
+        background: linear-gradient(180deg, #f6f3ff 0%, #fbfaff 100%);
+        border-radius: 30px;
+        padding: 24px;
+    }
+
+    .approval-hero {
+        background: linear-gradient(135deg, #34215d 0%, #6d46d6 55%, #a78bfa 100%);
+        color: #fff;
+        border-radius: 28px;
+        padding: 30px;
+        box-shadow: 0 20px 42px rgba(109, 70, 214, 0.22);
+        margin-bottom: 24px;
+    }
+
+    .summary-card {
+        background: rgba(255,255,255,.96);
+        border: 1px solid #ece7ff;
+        border-radius: 22px;
+        box-shadow: 0 12px 30px rgba(31, 41, 55, 0.06);
+        padding: 20px;
+        height: 100%;
+    }
+
+    .summary-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: .6px;
+        color: #8b78b5;
+        font-weight: 800;
+    }
+
+    .summary-value {
+        font-size: 28px;
+        font-weight: 900;
+        color: #2f2646;
+        margin-top: 6px;
+    }
+
+    .list-card {
+        background: rgba(255,255,255,.97);
+        border: 1px solid #ece7ff;
+        border-radius: 26px;
+        box-shadow: 0 12px 30px rgba(31, 41, 55, 0.06);
+        overflow: hidden;
+    }
+
+    .approval-item {
+        border-bottom: 1px solid #f3effd;
+        padding: 24px;
+    }
+
+        .approval-item:last-child {
+            border-bottom: 0;
+        }
+
+    .student-avatar {
+        width: 54px;
+        height: 54px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+        color: #5b21b6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 22px;
+    }
+
+    .meta-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 12px;
+        border-radius: 999px;
+        background: #f6f0ff;
+        color: #5a3c97;
+        font-size: 12px;
+        font-weight: 700;
+        margin-right: 8px;
+        margin-bottom: 8px;
+    }
+
+    .action-btn {
+        border-radius: 999px;
+        font-weight: 700;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+</style>
+
+<div class="approval-shell">
+    <div class="approval-hero">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+            <div>
+                <div class="small text-uppercase fw-bold opacity-75 mb-2">Staj Onay Yönetimi</div>
+                <h2 class="fw-bold mb-2">Bekleyen Onaylar</h2>
+                <div class="opacity-75">
+                    Öğrenci başvurularını, yüklenen sözleşmeleri ve onay bekleyen süreçleri bu ekrandan yönetebilirsin.
+                </div>
+            </div>
+            <div class="badge rounded-pill px-3 py-2" style="background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.18);">
+                <i class="bi bi-hourglass-split me-1"></i> İnceleme Ekranı
+            </div>
+        </div>
+    </div>
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success rounded-4 border-0 shadow-sm">@TempData["SuccessMessage"]</div>
+    }
+
+    @if (TempData["ErrorMessage"] != null)
+    {
+        <div class="alert alert-danger rounded-4 border-0 shadow-sm">@TempData["ErrorMessage"]</div>
+    }
+
+    <div class="row g-4 mb-4">
+        <div class="col-md-4">
+            <div class="summary-card">
+                <div class="summary-label">Toplam Bekleyen Kayıt</div>
+                <div class="summary-value">@Model.Count()</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="summary-card">
+                <div class="summary-label">Ön Onay Bekleyen</div>
+                <div class="summary-value">@Model.Count(x => !x.IsApplicationApproved)</div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="summary-card">
+                <div class="summary-label">Sözleşme Bekleyen</div>
+                <div class="summary-value">@Model.Count(x => x.ContractUploadedDate != null && !x.IsContractApproved)</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="list-card">
+        @if (Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+                var contractFile = item.InternshipFiles?.FirstOrDefault(f => !f.IsDeleted && f.FileType == InternshipFileType.Contract);
+
+                <div class="approval-item">
+                    <div class="d-flex justify-content-between align-items-start flex-wrap gap-3">
+                        <div class="d-flex gap-3">
+                            <div class="student-avatar">
+                                <i class="bi bi-person-badge"></i>
+                            </div>
+
+                            <div>
+                                <h5 class="fw-bold mb-1">@item.Student?.FullName</h5>
+
+                                <div class="mb-2">
+                                    <span class="meta-chip"><i class="bi bi-building"></i> @item.Company?.Name</span>
+                                </div>
+
+                                <div class="mb-2">
+                                    <span class="meta-chip"><i class="bi bi-calendar-event"></i> @item.StartDate.ToString("dd.MM.yyyy") - @item.EndDate.ToString("dd.MM.yyyy")</span>
+                                    <span class="meta-chip"><i class="bi bi-tag"></i> @GetTypeText(item.Types)</span>
+                                </div>
+
+                                <div>
+                                    <span class="badge @GetStatusClass(item) px-3 py-2 rounded-pill">
+                                        @GetStatusText(item)
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="text-end">
+                            @if (contractFile != null)
+                            {
+                                <a href="@contractFile.FilePath" target="_blank" class="btn btn-outline-primary action-btn mb-2">
+                                    <i class="bi bi-file-earmark-text me-1"></i> Sözleşmeyi Aç
+                                </a>
+                            }
+
+                            <div class="d-flex flex-column gap-2">
+                                <a asp-action="Details"
+                                   asp-controller="Internship"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-outline-dark action-btn w-100">
+                                    <i class="bi bi-eye me-1"></i> Detayları Gör
+                                </a>
+                                @if (!item.IsApplicationApproved && item.Status != InternshipStatus.Rejected)
+                                {
+                                    <form asp-action="ApproveApplication" asp-controller="Internship" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button type="submit" class="btn btn-success action-btn w-100">
+                                            <i class="bi bi-check2-circle me-1"></i> Ön Onay Ver
+                                        </button>
+                                    </form>
+                                }
+
+                                @if (item.IsApplicationApproved && item.ContractUploadedDate != null && !item.IsContractApproved && item.Status != InternshipStatus.Rejected)
+                                {
+                                    <form asp-action="ApproveContract" asp-controller="Internship" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button type="submit" class="btn btn-primary action-btn w-100">
+                                            <i class="bi bi-patch-check me-1"></i> Sözleşmeyi Onayla
+                                        </button>
+                                    </form>
+                                }
+
+                                @if (item.Status != InternshipStatus.Rejected && item.Status != InternshipStatus.Ongoing && item.Status != InternshipStatus.Completed)
+                                {
+                                    <form asp-action="RejectInternship" asp-controller="Internship" method="post">
+                                        @Html.AntiForgeryToken()
+                                        <input type="hidden" name="id" value="@item.Id" />
+                                        <button type="submit" class="btn btn-outline-danger action-btn w-100">
+                                            <i class="bi bi-x-circle me-1"></i> Reddet
+                                        </button>
+                                    </form>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else
+        {
+            <div class="p-5 text-center text-muted">
+                <i class="bi bi-check2-all display-5 d-block mb-3 text-success"></i>
+                Şu anda bekleyen onay kaydı bulunmuyor.
+            </div>
+        }
+    </div>
+</div>

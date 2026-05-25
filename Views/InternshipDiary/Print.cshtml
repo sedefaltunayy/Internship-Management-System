@@ -1,0 +1,173 @@
+﻿@model WebTabanliStajTakipSistemi.Models.InternshipDiary
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="utf-8" />
+    <title>İşyeri Eğitimi Günlük Rapor</title>
+    <style>
+        @@page {
+            size: A4;
+            margin: 18mm;
+        }
+
+        body {
+            font-family: "Times New Roman", serif;
+            font-size: 14px;
+            color: #111;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 20px 0;
+        }
+
+        .page {
+            width: 210mm;
+            min-height: 297mm;
+            background: white;
+            margin: 0 auto;
+            box-shadow: 0 0 20px rgba(0,0,0,.12);
+            padding: 18mm;
+            box-sizing: border-box;
+        }
+
+        .header {
+            display: grid;
+            grid-template-columns: 90px 1fr 90px;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .logo-box, .stamp-box {
+            height: 90px;
+            border: 1px solid #222;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .title-box {
+            text-align: center;
+            font-weight: bold;
+            line-height: 1.5;
+        }
+
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 14px;
+        }
+
+        .info-table td {
+            border: 1px solid #222;
+            padding: 8px 10px;
+            vertical-align: top;
+        }
+
+        .content {
+            line-height: 1.8;
+            text-align: justify;
+        }
+
+        .content img {
+            max-width: 100%;
+            display: block;
+            margin: 14px auto;
+            border: 1px solid #888;
+        }
+
+        .sign-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+        }
+
+        .sign-table td {
+            border: 1px solid #222;
+            padding: 16px 10px;
+            text-align: center;
+            vertical-align: bottom;
+            height: 90px;
+        }
+
+        .print-toolbar {
+            width: 210mm;
+            margin: 0 auto 10px auto;
+            text-align: right;
+        }
+
+        @@media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+
+            .print-toolbar {
+                display: none;
+            }
+
+            .page {
+                box-shadow: none;
+                margin: 0;
+                width: auto;
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="print-toolbar">
+        <button onclick="window.print()">Yazdır / PDF İndir</button>
+    </div>
+
+    <div class="page">
+        <div class="header">
+            <div class="logo-box">LOGO</div>
+
+            <div class="title-box">
+                <div>ISPARTA UYGULAMALI BİLİMLER ÜNİVERSİTESİ</div>
+                <div>TEKNOLOJİ FAKÜLTESİ</div>
+                <div>BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ</div>
+                <div>İŞYERİ EĞİTİMİ GÜNLÜK RAPOR</div>
+            </div>
+
+            <div class="stamp-box">MÜHÜR / ONAY</div>
+        </div>
+
+        <table class="info-table">
+            <tr>
+                <td><strong>Öğrenci:</strong> @Model.Student?.FullName</td>
+                <td><strong>Tarih:</strong> @Model.WorkDate.ToString("dd/MM/yyyy")</td>
+            </tr>
+            <tr>
+                <td><strong>Staj:</strong> @Model.Internship?.Position</td>
+                <td><strong>Durum:</strong> @Model.Status</td>
+            </tr>
+            <tr>
+                <td colspan="2"><strong>Yapılan İş:</strong> @Model.Title</td>
+            </tr>
+        </table>
+
+        <div class="content">
+            @Html.Raw(Model.Content)
+        </div>
+
+        <table class="sign-table">
+            <tr>
+                <td><strong>ÖĞRENCİ</strong></td>
+                <td><strong>İŞYERİ EĞİTİM YETKİLİSİ</strong></td>
+            </tr>
+            <tr>
+                <td>@DateTime.Now.ToString("dd/MM/yyyy")</td>
+                <td>@DateTime.Now.ToString("dd/MM/yyyy")</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

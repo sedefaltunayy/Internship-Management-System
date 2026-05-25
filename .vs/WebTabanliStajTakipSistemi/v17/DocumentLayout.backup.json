@@ -1,0 +1,872 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\internship\\contractform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\internship\\contractform.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\internship\\documents.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\internship\\documents.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\internship\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\internship\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\controllers\\internshipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:controllers\\internshipcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Migrations\\20260525201549_AddStudentInternshipFormFields.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Migrations\\20260525201549_AddStudentInternshipFormFields.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:models\\student.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\internshipdiary\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\internshipdiary\\edit.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\controllers\\internshipdiarycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:controllers\\internshipdiarycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\controllers\\academiccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:controllers\\academiccontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\academic\\diaryreviews.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\academic\\diaryreviews.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\internshipdiary\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\internshipdiary\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\internshipdiary\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\internshipdiary\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\internshipdiary\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\internshipdiary\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\models\\internshipdiary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:models\\internshipdiary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\internshipdiary\\print.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\internshipdiary\\print.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\models\\diaryfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:models\\diaryfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\enums\\diarystatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:enums\\diarystatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\enums\\internshipfiletype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:enums\\internshipfiletype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\internship\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\internship\\create.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\viewmodels\\internshipcreateviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:viewmodels\\internshipcreateviewmodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:models\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\enums\\internshipstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:enums\\internshipstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\student\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\student\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\internship\\pendingapprovals.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\internship\\pendingapprovals.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\internship\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\internship\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\enums\\internshiptypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:enums\\internshiptypes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\models\\internship.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:models\\internship.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\models\\city.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:models\\city.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\models\\country.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:models\\country.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:data\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\models\\internshipfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:models\\internshipfile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\admin\\teachers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\admin\\teachers.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\student\\documents.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\student\\documents.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\student\\applications.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\student\\applications.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\academic\\pendingcontracts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\academic\\pendingcontracts.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\academic\\activeinternships.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\academic\\activeinternships.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\shared\\_studentlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\shared\\_studentlayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\models\\academic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:models\\academic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\shared\\_academiclayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\shared\\_academiclayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\academic\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\academic\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\academic\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\academic\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\academic\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\academic\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\views\\academic\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:views\\academic\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\migrations\\20260426190954_internshipworkflowupdate2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:migrations\\20260426190954_internshipworkflowupdate2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\migrations\\20260516150455_addfilestatusfields.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:migrations\\20260516150455_addfilestatusfields.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\migrations\\20260515101531_addnewinternshipstatuses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:migrations\\20260515101531_addnewinternshipstatuses.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\migrations\\20260515092856_addissummerinternshipresponsibletoacademic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:migrations\\20260515092856_addissummerinternshipresponsibletoacademic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\migrations\\20260517162305_addcountrycitytocompany.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:migrations\\20260517162305_addcountrycitytocompany.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|c:\\users\\user\\source\\repos\\webtabanlistajtakipsistemi\\migrations\\20260523211530_changecompanytaxnumbertostring.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9D7CDB19-7C16-4BD5-B0B7-EECAE006A3E8}|WebTabanliStajTakipSistemi.csproj|solutionrelative:migrations\\20260523211530_changecompanytaxnumbertostring.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 255,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ContractForm.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Internship\\ContractForm.cshtml",
+              "RelativeDocumentMoniker": "Views\\Internship\\ContractForm.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Internship\\ContractForm.cshtml",
+              "RelativeToolTip": "Views\\Internship\\ContractForm.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOsAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-25T20:17:19.236Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "20260525201549_AddStudentInternshipFormFields.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Migrations\\20260525201549_AddStudentInternshipFormFields.cs",
+              "RelativeDocumentMoniker": "Migrations\\20260525201549_AddStudentInternshipFormFields.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Migrations\\20260525201549_AddStudentInternshipFormFields.cs",
+              "RelativeToolTip": "Migrations\\20260525201549_AddStudentInternshipFormFields.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-25T20:15:49.69Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Print.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\InternshipDiary\\Print.cshtml",
+              "RelativeDocumentMoniker": "Views\\InternshipDiary\\Print.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\InternshipDiary\\Print.cshtml",
+              "RelativeToolTip": "Views\\InternshipDiary\\Print.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJ0AAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-24T20:12:07.058Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Edit.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\InternshipDiary\\Edit.cshtml",
+              "RelativeDocumentMoniker": "Views\\InternshipDiary\\Edit.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\InternshipDiary\\Edit.cshtml",
+              "RelativeToolTip": "Views\\InternshipDiary\\Edit.cshtml",
+              "ViewState": "AgIAANACAAAAAAAAAAAYwAUDAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-24T20:11:47.56Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\InternshipDiary\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\InternshipDiary\\Details.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\InternshipDiary\\Details.cshtml",
+              "RelativeToolTip": "Views\\InternshipDiary\\Details.cshtml",
+              "ViewState": "AgIAAP0AAAAAAAAAAAAmwB0BAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-24T20:11:26.931Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\InternshipDiary\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\InternshipDiary\\Index.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\InternshipDiary\\Index.cshtml",
+              "RelativeToolTip": "Views\\InternshipDiary\\Index.cshtml",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAmwG8AAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-24T20:10:29.229Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "Comment.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\Comment.cs",
+              "RelativeDocumentMoniker": "Models\\Comment.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\Comment.cs",
+              "RelativeToolTip": "Models\\Comment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T20:09:43.489Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "DiaryFile.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\DiaryFile.cs",
+              "RelativeDocumentMoniker": "Models\\DiaryFile.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\DiaryFile.cs",
+              "RelativeToolTip": "Models\\DiaryFile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T20:09:26.05Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "DiaryStatus.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Enums\\DiaryStatus.cs",
+              "RelativeDocumentMoniker": "Enums\\DiaryStatus.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Enums\\DiaryStatus.cs",
+              "RelativeToolTip": "Enums\\DiaryStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-24T20:07:44.167Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\InternshipDiary\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\InternshipDiary\\Create.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\InternshipDiary\\Create.cshtml",
+              "RelativeToolTip": "Views\\InternshipDiary\\Create.cshtml",
+              "ViewState": "AgIAAE8DAAAAAAAAAAAmwGIDAAA8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-24T20:07:08.691Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "20260523211530_ChangeCompanyTaxNumberToString.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Migrations\\20260523211530_ChangeCompanyTaxNumberToString.cs",
+              "RelativeDocumentMoniker": "Migrations\\20260523211530_ChangeCompanyTaxNumberToString.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Migrations\\20260523211530_ChangeCompanyTaxNumberToString.cs",
+              "RelativeToolTip": "Migrations\\20260523211530_ChangeCompanyTaxNumberToString.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-23T21:15:30.715Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Student\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Student\\Index.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Student\\Index.cshtml",
+              "RelativeToolTip": "Views\\Student\\Index.cshtml",
+              "ViewState": "AgIAAI4AAAAAAAAAAAAAAKoAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-23T13:45:02.727Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Internship\\Details.cshtml",
+              "RelativeDocumentMoniker": "Views\\Internship\\Details.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Internship\\Details.cshtml",
+              "RelativeToolTip": "Views\\Internship\\Details.cshtml",
+              "ViewState": "AgIAABUAAAAAAAAAAAAswCgAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-23T12:38:54.506Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "20260517162305_AddCountryCityToCompany.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Migrations\\20260517162305_AddCountryCityToCompany.cs",
+              "RelativeDocumentMoniker": "Migrations\\20260517162305_AddCountryCityToCompany.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Migrations\\20260517162305_AddCountryCityToCompany.cs",
+              "RelativeToolTip": "Migrations\\20260517162305_AddCountryCityToCompany.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T16:23:06.557Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "InternshipCreateViewModel.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\ViewModels\\InternshipCreateViewModel.cs",
+              "RelativeDocumentMoniker": "ViewModels\\InternshipCreateViewModel.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\ViewModels\\InternshipCreateViewModel.cs",
+              "RelativeToolTip": "ViewModels\\InternshipCreateViewModel.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAAwwCcAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T16:16:07.667Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Data\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\AppDbContext.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Data\\AppDbContext.cs",
+              "RelativeToolTip": "Data\\AppDbContext.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAowBsAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T16:15:42.159Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "Company.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\Company.cs",
+              "RelativeDocumentMoniker": "Models\\Company.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\Company.cs",
+              "RelativeToolTip": "Models\\Company.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA0wBAAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T16:15:07.316Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "City.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\City.cs",
+              "RelativeDocumentMoniker": "Models\\City.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\City.cs",
+              "RelativeToolTip": "Models\\City.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T16:14:30.234Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "Country.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\Country.cs",
+              "RelativeDocumentMoniker": "Models\\Country.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\Country.cs",
+              "RelativeToolTip": "Models\\Country.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAADwvw0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T16:14:05.51Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "20260516150455_AddFileStatusFields.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Migrations\\20260516150455_AddFileStatusFields.cs",
+              "RelativeDocumentMoniker": "Migrations\\20260516150455_AddFileStatusFields.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Migrations\\20260516150455_AddFileStatusFields.cs",
+              "RelativeToolTip": "Migrations\\20260516150455_AddFileStatusFields.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC0AAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-16T15:04:55.56Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "InternshipFile.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\InternshipFile.cs",
+              "RelativeDocumentMoniker": "Models\\InternshipFile.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\InternshipFile.cs",
+              "RelativeToolTip": "Models\\InternshipFile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-16T15:00:41.122Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "InternshipFileType.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Enums\\InternshipFileType.cs",
+              "RelativeDocumentMoniker": "Enums\\InternshipFileType.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Enums\\InternshipFileType.cs",
+              "RelativeToolTip": "Enums\\InternshipFileType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-16T13:21:50.476Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Documents.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Internship\\Documents.cshtml",
+              "RelativeDocumentMoniker": "Views\\Internship\\Documents.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Internship\\Documents.cshtml",
+              "RelativeToolTip": "Views\\Internship\\Documents.cshtml",
+              "ViewState": "AgIAAD4BAAAAAAAAAAAmwFMBAABYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-15T10:57:19.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "PendingContracts.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Academic\\PendingContracts.cshtml",
+              "RelativeDocumentMoniker": "Views\\Academic\\PendingContracts.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Academic\\PendingContracts.cshtml",
+              "RelativeToolTip": "Views\\Academic\\PendingContracts.cshtml",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAAGwAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-15T10:37:27.2Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "_StudentLayout.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Shared\\_StudentLayout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_StudentLayout.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Shared\\_StudentLayout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_StudentLayout.cshtml",
+              "ViewState": "AgIAAEsAAAAAAAAAAAAvwFkAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-15T10:23:54.481Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "Applications.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Student\\Applications.cshtml",
+              "RelativeDocumentMoniker": "Views\\Student\\Applications.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Student\\Applications.cshtml",
+              "RelativeToolTip": "Views\\Student\\Applications.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-15T10:19:41.459Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "Documents.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Student\\Documents.cshtml",
+              "RelativeDocumentMoniker": "Views\\Student\\Documents.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Student\\Documents.cshtml",
+              "RelativeToolTip": "Views\\Student\\Documents.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-15T10:19:18.392Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "20260515101531_AddNewInternshipStatuses.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Migrations\\20260515101531_AddNewInternshipStatuses.cs",
+              "RelativeDocumentMoniker": "Migrations\\20260515101531_AddNewInternshipStatuses.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Migrations\\20260515101531_AddNewInternshipStatuses.cs",
+              "RelativeToolTip": "Migrations\\20260515101531_AddNewInternshipStatuses.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T10:15:31.568Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "InternshipDiary.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\InternshipDiary.cs",
+              "RelativeDocumentMoniker": "Models\\InternshipDiary.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\InternshipDiary.cs",
+              "RelativeToolTip": "Models\\InternshipDiary.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAwwBQAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T10:07:25.53Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AdminController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "Controllers\\AdminController.cs",
+              "ViewState": "AgIAAPoAAAAAAAAAAAAqwP4AAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T09:38:15.103Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "Teachers.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Admin\\Teachers.cshtml",
+              "RelativeDocumentMoniker": "Views\\Admin\\Teachers.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Admin\\Teachers.cshtml",
+              "RelativeToolTip": "Views\\Admin\\Teachers.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-15T09:35:59.933Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "20260515092856_AddIsSummerInternshipResponsibleToAcademic.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Migrations\\20260515092856_AddIsSummerInternshipResponsibleToAcademic.cs",
+              "RelativeDocumentMoniker": "Migrations\\20260515092856_AddIsSummerInternshipResponsibleToAcademic.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Migrations\\20260515092856_AddIsSummerInternshipResponsibleToAcademic.cs",
+              "RelativeToolTip": "Migrations\\20260515092856_AddIsSummerInternshipResponsibleToAcademic.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-15T09:28:56.742Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "StudentController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Controllers\\StudentController.cs",
+              "RelativeDocumentMoniker": "Controllers\\StudentController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Controllers\\StudentController.cs",
+              "RelativeToolTip": "Controllers\\StudentController.cs",
+              "ViewState": "AgIAAG0BAAAAAAAAAAAgwI8BAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T20:48:10.207Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Internship\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Internship\\Index.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Internship\\Index.cshtml",
+              "RelativeToolTip": "Views\\Internship\\Index.cshtml",
+              "ViewState": "AgIAAFAAAAAAAAAAAAAmwHAAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-14T20:47:36.207Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "Create.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Internship\\Create.cshtml",
+              "RelativeDocumentMoniker": "Views\\Internship\\Create.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Internship\\Create.cshtml",
+              "RelativeToolTip": "Views\\Internship\\Create.cshtml",
+              "ViewState": "AgIAAEUFAAAAAAAAAAAgwGYFAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-05-14T20:47:09.307Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Student.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\Student.cs",
+              "RelativeDocumentMoniker": "Models\\Student.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\Student.cs",
+              "RelativeToolTip": "Models\\Student.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAA9wBMAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T20:46:22.113Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Internship.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\Internship.cs",
+              "RelativeDocumentMoniker": "Models\\Internship.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\Internship.cs",
+              "RelativeToolTip": "Models\\Internship.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAUwC4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T20:46:01.038Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "InternshipTypes.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Enums\\InternshipTypes.cs",
+              "RelativeDocumentMoniker": "Enums\\InternshipTypes.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Enums\\InternshipTypes.cs",
+              "RelativeToolTip": "Enums\\InternshipTypes.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T20:39:50.018Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "InternshipStatus.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Enums\\InternshipStatus.cs",
+              "RelativeDocumentMoniker": "Enums\\InternshipStatus.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Enums\\InternshipStatus.cs",
+              "RelativeToolTip": "Enums\\InternshipStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-14T20:39:48.132Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "InternshipController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Controllers\\InternshipController.cs",
+              "RelativeDocumentMoniker": "Controllers\\InternshipController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Controllers\\InternshipController.cs",
+              "RelativeToolTip": "Controllers\\InternshipController.cs",
+              "ViewState": "AgIAACsDAAAAAAAAAAAQwGQDAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T20:24:49.894Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "InternshipDiaryController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Controllers\\InternshipDiaryController.cs",
+              "RelativeDocumentMoniker": "Controllers\\InternshipDiaryController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Controllers\\InternshipDiaryController.cs",
+              "RelativeToolTip": "Controllers\\InternshipDiaryController.cs",
+              "ViewState": "AgIAALAAAAAAAAAAAAAowNAAAAADAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T19:18:05.891Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "DiaryReviews.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Academic\\DiaryReviews.cshtml",
+              "RelativeDocumentMoniker": "Views\\Academic\\DiaryReviews.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Academic\\DiaryReviews.cshtml",
+              "RelativeToolTip": "Views\\Academic\\DiaryReviews.cshtml",
+              "ViewState": "AgIAAMoAAAAAAAAAAAAIwOUAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-26T19:14:42.529Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "ActiveInternships.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Academic\\ActiveInternships.cshtml",
+              "RelativeDocumentMoniker": "Views\\Academic\\ActiveInternships.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Academic\\ActiveInternships.cshtml",
+              "RelativeToolTip": "Views\\Academic\\ActiveInternships.cshtml",
+              "ViewState": "AgIAAHwAAAAAAAAAAAAswHcAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-26T19:14:19.05Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "PendingApprovals.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Internship\\PendingApprovals.cshtml",
+              "RelativeDocumentMoniker": "Views\\Internship\\PendingApprovals.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Internship\\PendingApprovals.cshtml",
+              "RelativeToolTip": "Views\\Internship\\PendingApprovals.cshtml",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAowB0AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-26T19:13:58.123Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "Profile.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Academic\\Profile.cshtml",
+              "RelativeDocumentMoniker": "Views\\Academic\\Profile.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Academic\\Profile.cshtml",
+              "RelativeToolTip": "Views\\Academic\\Profile.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-26T19:13:35.083Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "20260426190954_InternshipWorkflowUpdate2.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Migrations\\20260426190954_InternshipWorkflowUpdate2.cs",
+              "RelativeDocumentMoniker": "Migrations\\20260426190954_InternshipWorkflowUpdate2.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Migrations\\20260426190954_InternshipWorkflowUpdate2.cs",
+              "RelativeToolTip": "Migrations\\20260426190954_InternshipWorkflowUpdate2.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T19:09:54.546Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Academic\\Index.cshtml",
+              "RelativeDocumentMoniker": "Views\\Academic\\Index.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Academic\\Index.cshtml",
+              "RelativeToolTip": "Views\\Academic\\Index.cshtml",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAswOAAAAAGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-26T19:05:01.765Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "_AcademicLayout.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Shared\\_AcademicLayout.cshtml",
+              "RelativeDocumentMoniker": "Views\\Shared\\_AcademicLayout.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Shared\\_AcademicLayout.cshtml",
+              "RelativeToolTip": "Views\\Shared\\_AcademicLayout.cshtml",
+              "ViewState": "AgIAAJYAAAAAAAAAAAAUwKwAAAAVAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-26T19:04:01.909Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Academic\\Register.cshtml",
+              "RelativeDocumentMoniker": "Views\\Academic\\Register.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Academic\\Register.cshtml",
+              "RelativeToolTip": "Views\\Academic\\Register.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAALYAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-26T18:53:47.716Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Academic\\Login.cshtml",
+              "RelativeDocumentMoniker": "Views\\Academic\\Login.cshtml",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Views\\Academic\\Login.cshtml",
+              "RelativeToolTip": "Views\\Academic\\Login.cshtml",
+              "ViewState": "AgIAAF8AAAAAAAAAAAAswIYAAAAHAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-04-26T18:53:20.636Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AcademicController.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Controllers\\AcademicController.cs",
+              "RelativeDocumentMoniker": "Controllers\\AcademicController.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Controllers\\AcademicController.cs",
+              "RelativeToolTip": "Controllers\\AcademicController.cs",
+              "ViewState": "AgIAACYBAAAAAAAAAAAowCwBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T18:52:26.475Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "Academic.cs",
+              "DocumentMoniker": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\Academic.cs",
+              "RelativeDocumentMoniker": "Models\\Academic.cs",
+              "ToolTip": "C:\\Users\\User\\source\\repos\\WebTabanliStajTakipSistemi\\Models\\Academic.cs",
+              "RelativeToolTip": "Models\\Academic.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABCAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-26T18:49:59.678Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

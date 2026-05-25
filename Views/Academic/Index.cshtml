@@ -1,0 +1,225 @@
+﻿@{
+    Layout = "_AcademicLayout";
+    ViewData["Title"] = "Dashboard";
+}
+
+<style>
+    .stat-card {
+        border: 0;
+        border-radius: 22px;
+        box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+        overflow: hidden;
+        background: #fff;
+        transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 14px 34px rgba(15, 23, 42, 0.10);
+        }
+
+    .gradient-card {
+        background: linear-gradient(135deg, #3b2a67 0%, #6d46d6 55%, #a78bfa 100%);
+        color: #fff;
+        border-radius: 24px;
+        box-shadow: 0 18px 40px rgba(109, 70, 214, 0.22);
+    }
+
+    .icon-shell {
+        width: 62px;
+        height: 62px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 18px;
+        font-size: 24px;
+    }
+
+    .quick-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        border-radius: 999px;
+        padding: 10px 16px;
+        font-weight: 700;
+        text-decoration: none;
+    }
+
+    .panel-card {
+        background: #fff;
+        border: 0;
+        border-radius: 22px;
+        box-shadow: 0 10px 28px rgba(15, 23, 42, 0.06);
+        overflow: hidden;
+    }
+
+        .panel-card .card-header {
+            background: #fff;
+            border-bottom: 1px solid #f1f5f9;
+            padding: 18px 22px;
+        }
+
+    .mini-info {
+        font-size: 13px;
+        color: #64748b;
+    }
+
+    .mini-strong {
+        font-weight: 800;
+        color: #1f2937;
+    }
+</style>
+
+<div class="row g-4">
+    <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="mini-info text-uppercase fw-bold">Bekleyen Başvuru</div>
+                        <h2 class="fw-bold mb-0 mt-2">@ViewBag.PendingApplicationsCount</h2>
+                    </div>
+                    <div class="icon-shell" style="background: rgba(245, 158, 11, .14); color:#f59e0b;">
+                        <i class="bi bi-hourglass-split"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="mini-info text-uppercase fw-bold">Sözleşme Onayı</div>
+                        <h2 class="fw-bold mb-0 mt-2">@ViewBag.PendingContractsCount</h2>
+                    </div>
+                    <div class="icon-shell" style="background: rgba(59, 130, 246, .14); color:#3b82f6;">
+                        <i class="bi bi-file-earmark-check"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="mini-info text-uppercase fw-bold">Aktif Staj</div>
+                        <h2 class="fw-bold mb-0 mt-2">@ViewBag.ActiveInternshipsCount</h2>
+                    </div>
+                    <div class="icon-shell" style="background: rgba(16, 185, 129, .14); color:#10b981;">
+                        <i class="bi bi-briefcase-fill"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6">
+        <div class="stat-card">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <div class="mini-info text-uppercase fw-bold">Tamamlanan Staj</div>
+                        <h2 class="fw-bold mb-0 mt-2">@ViewBag.CompletedInternshipsCount</h2>
+                    </div>
+                    <div class="icon-shell" style="background: rgba(139, 92, 246, .14); color:#8b5cf6;">
+                        <i class="bi bi-check2-circle"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4 g-4">
+    <div class="col-12">
+        <div class="gradient-card p-4 p-lg-5">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <div class="small text-uppercase fw-bold opacity-75 mb-2">Hoş Geldiniz</div>
+                    <h3 class="fw-bold mb-2">@User.Identity?.Name</h3>
+                    <div class="opacity-75" style="max-width: 760px;">
+                        Bu panel üzerinden size atanmış staj başvurularını inceleyebilir, sözleşmeleri onaylayabilir ve öğrencilerin staj günlüklerini değerlendirebilirsiniz.
+                    </div>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2">
+                    <a asp-controller="Internship" asp-action="PendingApprovals" class="quick-link bg-white text-dark">
+                        <i class="bi bi-hourglass-top"></i> Bekleyen Onaylar
+                    </a>
+                    <a asp-controller="Academic" asp-action="Profile" class="quick-link" style="background:rgba(255,255,255,.15); color:#fff; border:1px solid rgba(255,255,255,.18);">
+                        <i class="bi bi-person-circle"></i> Profilim
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-1 g-4">
+    <div class="col-lg-7">
+        <div class="panel-card">
+            <div class="card-header">
+                <h6 class="m-0 fw-bold">
+                    <i class="bi bi-lightning-charge-fill me-2 text-warning"></i>Hızlı Erişim
+                </h6>
+            </div>
+            <div class="card-body p-4">
+                <div class="d-flex flex-wrap gap-2">
+                    <a asp-controller="Internship" asp-action="PendingApprovals" class="btn btn-outline-warning rounded-pill px-4">
+                        Bekleyen Başvurular
+                    </a>
+                    <a asp-controller="Academic" asp-action="ActiveInternships" class="btn btn-outline-primary rounded-pill px-4">
+                        Aktif Stajlar
+                    </a>
+                    <a asp-controller="Academic" asp-action="DiaryReviews" class="btn btn-outline-success rounded-pill px-4">
+                        Günlük İncelemeleri
+                    </a>
+                    <a asp-controller="Academic" asp-action="Profile" class="btn btn-outline-dark rounded-pill px-4">
+                        Profilim
+                    </a>
+                </div>
+
+                <div class="mt-4 mini-info">
+                    Bu bağlantılarla akademisyen iş akışında en sık kullanılan ekranlara hızlıca geçiş yapabilirsin.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-5">
+        <div class="panel-card">
+            <div class="card-header">
+                <h6 class="m-0 fw-bold">
+                    <i class="bi bi-info-circle-fill me-2 text-primary"></i>Durum Özeti
+                </h6>
+            </div>
+            <div class="card-body p-4">
+                <div class="mb-3">
+                    <div class="mini-info">Ön onay bekleyen başvuru</div>
+                    <div class="mini-strong">@ViewBag.PendingApplicationsCount adet</div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="mini-info">Sözleşme kontrolü bekleyen</div>
+                    <div class="mini-strong">@ViewBag.PendingContractsCount adet</div>
+                </div>
+
+                <div class="mb-3">
+                    <div class="mini-info">Şu an devam eden staj</div>
+                    <div class="mini-strong">@ViewBag.ActiveInternshipsCount adet</div>
+                </div>
+
+                <div>
+                    <div class="mini-info">Tamamlanmış staj</div>
+                    <div class="mini-strong">@ViewBag.CompletedInternshipsCount adet</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

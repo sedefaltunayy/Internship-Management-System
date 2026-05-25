@@ -1,0 +1,99 @@
+﻿@model WebTabanliStajTakipSistemi.ViewModels.StudentProfileViewModel
+
+@{
+    Layout = "_StudentLayout";
+    ViewData["Title"] = "Profilim";
+}
+
+<div class="row justify-content-center">
+    <div class="col-xl-8 col-lg-10">
+        <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+            <div class="card-header bg-primary text-white py-4 px-4">
+                <h4 class="m-0 fw-bold">
+                    <i class="bi bi-person-circle me-2"></i> Profilim
+                </h4>
+                <p class="mb-0 small text-white-50">
+                    Hesap bilgilerinizi buradan güncelleyebilirsiniz.
+                </p>
+            </div>
+
+            <div class="card-body p-4">
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        @TempData["SuccessMessage"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+
+                <form asp-controller="Student" asp-action="Profile" method="post">
+                    @Html.AntiForgeryToken()
+                    <input asp-for="Id" type="hidden" />
+
+                    <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="FullName" class="form-label fw-semibold">Ad Soyad</label>
+                            <input asp-for="FullName" class="form-control form-control-lg" />
+                            <span asp-validation-for="FullName" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Email" class="form-label fw-semibold">E-Posta</label>
+                            <input asp-for="Email" class="form-control form-control-lg" />
+                            <span asp-validation-for="Email" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="StudentNumber" class="form-label fw-semibold">Öğrenci Numarası</label>
+                            <input asp-for="StudentNumber" class="form-control form-control-lg" readonly />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Üniversite</label>
+                            <input value="@Model.UniversityName" class="form-control form-control-lg" readonly />
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label fw-semibold">Bölüm</label>
+                            <input value="@Model.DepartmentName" class="form-control form-control-lg" readonly />
+                        </div>
+                    </div>
+
+                    <hr class="my-4" />
+
+                    <h6 class="fw-bold mb-3 text-secondary">Şifre Güncelle</h6>
+
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label asp-for="NewPassword" class="form-label fw-semibold">Yeni Şifre</label>
+                            <input asp-for="NewPassword" type="password" class="form-control form-control-lg" />
+                            <span asp-validation-for="NewPassword" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="ConfirmPassword" class="form-label fw-semibold">Yeni Şifre Tekrar</label>
+                            <input asp-for="ConfirmPassword" type="password" class="form-control form-control-lg" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mt-4">
+                        <a asp-controller="Student" asp-action="Index" class="btn btn-light px-4">
+                            <i class="bi bi-arrow-left me-1"></i> Geri Dön
+                        </a>
+
+                        <button type="submit" class="btn btn-primary px-4">
+                            <i class="bi bi-check2-circle me-1"></i> Güncelle
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

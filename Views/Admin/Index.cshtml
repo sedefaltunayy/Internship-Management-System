@@ -1,0 +1,147 @@
+﻿@using WebTabanliStajTakipSistemi.Models
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Genel Bakış";
+}
+
+<div class="row g-4">
+    <div class="col-xl-4 col-md-6">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-muted small text-uppercase fw-bold">Toplam Öğrenci</h6>
+                        <h3 class="fw-bold mb-0">@ViewBag.OgrenciSayisi</h3>
+                    </div>
+                    <div class="bg-primary bg-opacity-10 p-3 rounded-circle text-primary">
+                        <i class="bi bi-people-fill fs-3"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-6">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-muted small text-uppercase fw-bold">Bekleyen Başvurular</h6>
+                        <h3 class="fw-bold mb-0">@ViewBag.BekleyenBasvuruSayisi</h3>
+                    </div>
+                    <div class="bg-warning bg-opacity-10 p-3 rounded-circle text-warning">
+                        <i class="bi bi-hourglass-split fs-3"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-md-12">
+        <div class="card border-0 shadow-sm rounded-3">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="text-muted small text-uppercase fw-bold">Staj Dönemi</h6>
+                        <h4 class="fw-bold mb-0">@((ViewBag.DonemAcikMi == true) ? "Açık" : "Kapalı")</h4>
+                    </div>
+                    <div class="@((ViewBag.DonemAcikMi == true) ? "bg-success" : "bg-danger") bg-opacity-10 p-3 rounded-circle @((ViewBag.DonemAcikMi == true) ? "text-success" : "text-danger")">
+                        <i class="bi bi-calendar-check fs-3"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-12 mb-4">
+        <div class="card border-0 shadow-sm rounded-3 bg-dark text-white p-4" style="background: linear-gradient(45deg, #1a2236, #212b44) !important;">
+            <div class="d-flex justify-content-between align-items-center flex-wrap gap-3">
+                <div>
+                    <h5 class="fw-bold mb-1"><i class="bi bi-lightning-charge me-2 text-warning"></i>Yönetim Kısayolları</h5>
+                    <p class="small text-light text-opacity-75 mb-0">Üniversite, bölüm ve sistem ayarlarına buradan hızlıca ulaşabilirsiniz.</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <a asp-controller="University" asp-action="Index" class="btn btn-light btn-sm fw-bold px-3">Üniversite Yönetimi</a>
+                    <a asp-controller="Admin" asp-action="Settings" class="btn btn-primary btn-sm fw-bold px-3 shadow-sm">Sistem Ayarları</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-8">
+        <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+            <div class="card-header bg-white py-3 border-0">
+                <h6 class="m-0 fw-bold text-dark"><i class="bi bi-clock-history me-2 text-primary"></i>Son Kayıt Olan Öğrenciler</h6>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0" style="font-size: 14px;">
+                        <thead class="bg-light text-muted">
+                            <tr>
+                                <th class="ps-4 py-3">Öğrenci</th>
+                                <th>Bölüm</th>
+                                <th>Kayıt Tarihi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (ViewBag.SonOgrenciler != null)
+                            {
+                                foreach (var student in (List<Student>)ViewBag.SonOgrenciler)
+                                {
+                                    <tr>
+                                        <td class="ps-4">
+                                            <div class="fw-bold">@student.FullName</div>
+                                            <div class="text-muted extra-small" style="font-size: 11px;">@student.StudentNumber</div>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-light text-dark border fw-normal">@(student.Department?.Name ?? "Belirtilmemiş")</span>
+                                        </td>
+                                        <td class="text-muted small">@student.CreatedDate.ToString("dd.MM.yyyy")</td>
+                                    </tr>
+                                }
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td colspan="3" class="text-center py-4 text-muted small">Henüz kayıtlı öğrenci bulunamadı.</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="card-footer bg-white border-0 text-center py-2">
+                <a asp-action="Students" class="small text-decoration-none">Tüm Öğrencileri Görüntüle</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card border-0 shadow-sm rounded-3 overflow-hidden">
+            <div class="card-header bg-white py-3 border-0">
+                <h6 class="m-0 fw-bold text-dark"><i class="bi bi-bank me-2 text-success"></i>Kayıtlı Üniversiteler</h6>
+            </div>
+            <div class="card-body p-0">
+                <ul class="list-group list-group-flush">
+                    @if (ViewBag.SonUniversiteler != null)
+                    {
+                        foreach (var uni in (List<University>)ViewBag.SonUniversiteler)
+                        {
+                            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-3 py-3 border-bottom-light">
+                                <div class="small fw-semibold text-dark">@uni.Name</div>
+                                <i class="bi bi-chevron-right small text-muted"></i>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <li class="list-group-item text-center py-4 text-muted small">Kayıtlı üniversite yok.</li>
+                    }
+                </ul>
+            </div>
+            <div class="card-footer bg-white border-0 text-center py-2">
+                <a asp-controller="University" asp-action="Index" class="small text-decoration-none">Tümünü Yönet</a>
+            </div>
+        </div>
+    </div>
+</div>

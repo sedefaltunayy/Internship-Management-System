@@ -1,0 +1,1382 @@
+﻿@model WebTabanliStajTakipSistemi.ViewModels.InternshipCreateViewModel
+
+@{
+    Layout = "_StudentLayout";
+    ViewData["Title"] = "Yeni Staj Başvurusu";
+}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.css" />
+
+<style>
+    .internship-page {
+        background: linear-gradient(180deg, #eef5ff 0%, #f8fbff 100%);
+        border-radius: 28px;
+        padding: 24px;
+    }
+
+    .map-section {
+        background: rgba(255,255,255,.97);
+        border: 1px solid #dbeafe;
+        border-radius: 26px;
+        box-shadow: 0 12px 28px rgba(15,91,215,.08);
+        overflow: hidden;
+        margin-bottom: 24px;
+    }
+
+    .map-header {
+        padding: 18px 24px 14px;
+        border-bottom: 1px solid #e8f0ff;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .map-header-title {
+        font-size: 17px;
+        font-weight: 800;
+        color: #123b7a;
+        margin: 0;
+    }
+
+    .map-header-sub {
+        font-size: 12px;
+        color: #6b7fa3;
+        margin: 2px 0 0;
+    }
+
+    .map-legend {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 12px;
+        color: #6b7fa3;
+    }
+
+    .legend-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        display: inline-block;
+        margin-right: 4px;
+        vertical-align: middle;
+    }
+
+    .map-body {
+        display: flex;
+        height: 460px;
+    }
+
+    #turkeyMap {
+        flex: 1;
+        background: #eef5ff;
+        min-height: 460px;
+    }
+
+    .map-sidebar {
+        width: 260px;
+        border-left: 1px solid #e8f0ff;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+    }
+
+    .map-sidebar-header {
+        padding: 14px 16px 10px;
+        border-bottom: 1px solid #e8f0ff;
+        background: #f8fbff;
+    }
+
+    .map-sidebar-city {
+        font-size: 15px;
+        font-weight: 800;
+        color: #123b7a;
+        margin: 0;
+    }
+
+    .map-sidebar-count {
+        font-size: 12px;
+        color: #6b7fa3;
+        margin: 2px 0 0;
+    }
+
+    .map-sidebar-body {
+        flex: 1;
+        overflow-y: auto;
+    }
+
+    .company-map-entry {
+        padding: 10px 16px;
+        border-bottom: 1px solid #f0f6ff;
+        cursor: pointer;
+        transition: background 0.15s;
+    }
+
+        .company-map-entry:last-child {
+            border-bottom: 0;
+        }
+
+        .company-map-entry:hover {
+            background: #eef5ff;
+        }
+
+    .company-map-name {
+        font-size: 13px;
+        font-weight: 700;
+        color: #1e40af;
+        margin: 0;
+    }
+
+    .company-map-count {
+        font-size: 11px;
+        color: #6b7fa3;
+        margin: 2px 0 0;
+    }
+
+    .map-empty-msg {
+        padding: 28px 16px;
+        text-align: center;
+        color: #9ca3af;
+        font-size: 13px;
+    }
+
+    .leaflet-city-tooltip {
+        background: #1e40af;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 6px 10px;
+        box-shadow: 0 4px 12px rgba(30,64,175,.3);
+        line-height: 1.5;
+        text-align: center;
+    }
+
+        /* Tooltip ok işaretini kaldır */
+        .leaflet-city-tooltip::before {
+            display: none;
+        }
+
+    /* Yurt dışı toggle */
+    .location-toggle {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+    }
+
+    .location-btn {
+        flex: 1;
+        min-width: 160px;
+        padding: 14px 20px;
+        border: 2px solid #dbeafe;
+        border-radius: 16px;
+        background: #f8fbff;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-align: center;
+    }
+
+        .location-btn.active {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+
+    .location-btn-icon {
+        font-size: 24px;
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .location-btn-label {
+        font-size: 14px;
+        font-weight: 700;
+        color: #1e40af;
+    }
+
+    .location-btn-sub {
+        font-size: 11px;
+        color: #6b7fa3;
+        margin-top: 2px;
+    }
+
+    /* Form */
+    .main-card {
+        background: rgba(255,255,255,.97);
+        border: 1px solid #dbeafe;
+        border-radius: 26px;
+        box-shadow: 0 12px 28px rgba(15,91,215,.08);
+        overflow: hidden;
+    }
+
+    .section-title {
+        font-size: 18px;
+        font-weight: 800;
+        color: #123b7a;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .section-badge {
+        background: #e8f1ff;
+        color: #0f5bd7;
+        font-size: 12px;
+        font-weight: 700;
+        border-radius: 999px;
+        padding: 6px 12px;
+    }
+
+    .soft-box {
+        background: linear-gradient(180deg, #f8fbff 0%, #f1f7ff 100%);
+        border: 1px solid #dbeafe;
+        border-radius: 20px;
+        padding: 20px;
+    }
+
+    .form-label {
+        font-weight: 700;
+        color: #264272;
+        margin-bottom: 8px;
+    }
+
+    .form-control, .form-select {
+        border-radius: 16px;
+        min-height: 52px;
+        border: 1px solid #cfe0ff;
+        box-shadow: none !important;
+        transition: all .2s ease;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #5b9bff;
+            box-shadow: 0 0 0 .2rem rgba(43,130,251,.12) !important;
+        }
+
+    textarea.form-control {
+        min-height: 110px;
+        resize: vertical;
+    }
+
+    .company-fields-wrap {
+        display: block;
+        margin-top: 18px;
+    }
+
+        .company-fields-wrap.show {
+            display: block;
+        }
+
+    .suggestion-empty {
+        padding: 12px 14px;
+        border-radius: 12px;
+        background: #fff7ed;
+        border: 1px solid #fed7aa;
+    }
+
+    .suggestion-empty-title {
+        font-size: 14px;
+        font-weight: 800;
+        color: #9a3412;
+    }
+
+    .suggestion-empty-sub {
+        font-size: 11px;
+        color: #9a3412;
+        margin-top: 3px;
+    }
+
+    .mini-note {
+        font-size: 13px;
+        color: #6b7fa3;
+    }
+
+    .company-info-note {
+        font-size: 13px;
+        color: #5c7199;
+        margin-top: 6px;
+    }
+
+    .btn-soft {
+        background: #eef5ff;
+        color: #1552b8;
+        border: 1px solid #cfe0ff;
+        border-radius: 999px;
+        font-weight: 700;
+        padding: 10px 18px;
+    }
+
+        .btn-soft:hover {
+            background: #e3efff;
+            color: #0f4fb1;
+        }
+
+    .btn-primary {
+        border-radius: 999px;
+        font-weight: 700;
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+    /* Firma arama */
+    .company-search-wrap {
+        position: relative;
+    }
+
+    .company-search-input {
+        width: 100%;
+        padding: 14px 18px;
+        font-size: 15px;
+        border: 1.5px solid #cfe0ff;
+        border-radius: 16px;
+        outline: none;
+        transition: border-color 0.2s;
+        background: #fff;
+    }
+
+        .company-search-input:focus {
+            border-color: #3b82f6;
+        }
+
+    .company-suggestions {
+        display: none;
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        right: 0;
+        background: #fff;
+        border: 1px solid #cfe0ff;
+        border-radius: 16px;
+        box-shadow: 0 12px 28px rgba(15,91,215,.16);
+        z-index: 9999;
+        max-height: 240px;
+        overflow-y: auto;
+        padding: 6px;
+    }
+
+    .suggestion-item {
+        padding: 12px 14px;
+        cursor: pointer;
+        border-radius: 12px;
+        transition: background .15s ease, transform .15s ease;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+    }
+
+        .suggestion-item:hover {
+            background: #eef5ff;
+        }
+
+    .suggestion-main {
+        min-width: 0;
+    }
+
+    .suggestion-name {
+        font-size: 14px;
+        font-weight: 800;
+        color: #154ba6;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .suggestion-meta {
+        font-size: 11px;
+        color: #6b7fa3;
+        margin-top: 3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .suggestion-select-text {
+        font-size: 12px;
+        font-weight: 700;
+        color: #2563eb;
+        background: #eff6ff;
+        border: 1px solid #bfdbfe;
+        border-radius: 999px;
+        padding: 5px 10px;
+        white-space: nowrap;
+    }
+
+    .suggestion-new {
+        border-top: 1px solid #eef4ff;
+        margin-top: 4px;
+        padding-top: 10px;
+    }
+
+    .suggestion-new .suggestion-name {
+        color: #0f766e;
+    }
+
+    .suggestion-new .suggestion-select-text {
+        color: #0f766e;
+        background: #ecfdf5;
+        border-color: #bbf7d0;
+    }
+
+    .company-action-row {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 10px;
+    }
+
+    .company-info-clear-btn {
+        border: 1px solid #cfe0ff;
+        background: #eef5ff;
+        color: #1552b8;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        padding: 8px 14px;
+        cursor: pointer;
+        transition: all .15s ease;
+    }
+
+    .company-info-clear-btn:hover {
+        background: #e3efff;
+        color: #0f4fb1;
+    }
+
+    
+
+    .selected-company-box {
+        display: none;
+        margin-top: 12px;
+        padding: 12px 16px;
+        background: #eef6ff;
+        border: 1px solid #cfe0ff;
+        border-radius: 14px;
+    }
+
+    .selected-company-box.show {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .selected-company-title {
+        font-weight: 800;
+        color: #154ba6;
+        font-size: 14px;
+    }
+
+    .selected-company-sub {
+        font-size: 12px;
+        color: #5d7398;
+        margin-top: 2px;
+    }
+
+    .company-clear-btn {
+        background: none;
+        border: none;
+        color: #6b7fa3;
+        font-size: 18px;
+        cursor: pointer;
+        padding: 0 4px;
+    }
+
+        .company-clear-btn:hover {
+            color: #ef4444;
+        }
+
+    @@media (max-width: 768px) {
+        .map-body {
+            flex-direction: column;
+            height: auto;
+        }
+
+        #turkeyMap {
+            height: 300px;
+        }
+
+        .map-sidebar {
+            width: 100%;
+            border-left: none;
+            border-top: 1px solid #e8f0ff;
+            max-height: 200px;
+        }
+    }
+
+    .city-label {
+        background: transparent;
+        border: none;
+        pointer-events: none;
+    }
+
+    .city-label-inner {
+        font-size: 9px;
+        font-weight: 800;
+        color: #1e3a8a;
+        text-align: center;
+        text-shadow: 0 0 3px #ffffff, 0 0 3px #ffffff, 0 0 4px #ffffff;
+        line-height: 1.2;
+        white-space: nowrap;
+        pointer-events: none;
+    }
+</style>
+
+<div class="internship-page">
+
+    <!-- ═══ YURTİÇİ / YURTDIŞI SEÇİMİ ═══ -->
+    <div class="main-card mb-4">
+        <div class="card-body p-4">
+            <div class="section-title mb-3">
+                <span class="section-badge">?</span>
+                Staj Nerede Yapılacak?
+            </div>
+            <div class="location-toggle">
+                <div class="location-btn active" id="btnDomestic">
+                    <span class="location-btn-icon">🇹🇷</span>
+                    <div class="location-btn-label">Türkiye'de</div>
+                    <div class="location-btn-sub">Yurt içi staj</div>
+                </div>
+                <div class="location-btn" id="btnAbroad">
+                    <span class="location-btn-icon">✈️</span>
+                    <div class="location-btn-label">Yurt Dışında</div>
+                    <div class="location-btn-sub">Uluslararası staj</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ TÜRKİYE HARİTASI (yurt içi) ═══ -->
+    <div class="map-section" id="mapSection">
+        <div class="map-header">
+            <div>
+                <div class="map-header-title">
+                    <i class="bi bi-map me-2 text-primary"></i>Türkiye Staj Haritası
+                </div>
+                <div class="map-header-sub">
+                    İle tıklayın — stajlı firmalar ve öğrenci sayıları görünsün. Firmayı seçince bilgiler forma gelir.
+                </div>
+            </div>
+            <div class="map-legend">
+                <span><span class="legend-dot" style="background:#3b82f6;"></span>Stajlı il</span>
+                <span><span class="legend-dot" style="background:#dbeafe;border:1px solid #93c5fd;"></span>Stajsız il</span>
+            </div>
+        </div>
+
+        <div class="map-body">
+            <div id="turkeyMap"></div>
+            <div class="map-sidebar">
+                <div class="map-sidebar-header">
+                    <div class="map-sidebar-city" id="sidebarCityName">Haritadan il seçin</div>
+                    <div class="map-sidebar-count" id="sidebarCityCount">İle tıklayarak firmaları görün</div>
+                </div>
+                <div class="map-sidebar-body" id="sidebarCityBody">
+                    <div class="map-empty-msg">
+                        <i class="bi bi-geo d-block mb-2" style="font-size:2rem;color:#cbd5e1;"></i>
+                        Haritadan bir ile tıklayın
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ═══ FORM ═══ -->
+    <div class="main-card">
+        <div class="card-body p-4 p-lg-5">
+            <form asp-action="Create" method="post" novalidate>
+                @Html.AntiForgeryToken()
+                <div asp-validation-summary="All" class="alert alert-danger rounded-4 mb-3"></div>
+
+                <!-- 1. Firma Seçimi -->
+                <div class="section-title">
+                    <span class="section-badge">1</span>
+                    Firma Seçimi
+                </div>
+
+                <div class="soft-box mb-4">
+
+                    <!-- Yurt dışı: ülke + şehir dropdown -->
+                    <div id="abroadSelects" style="display:none;" class="mb-3">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Ülke</label>
+                                <select id="countrySelect" class="form-select form-select-lg">
+                                    <option value="">Ülke seçiniz...</option>
+                                    @foreach (var country in (IEnumerable<dynamic>)ViewBag.Countries)
+                                    {
+                                        if (country.Name != "Türkiye")
+                                        {
+                                            <option value="@country.Id">@country.Name</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Şehir</label>
+                                <select id="citySelect" class="form-select form-select-lg" disabled>
+                                    <option value="">Önce ülke seçin...</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Gizli hidden alanlar -->
+                    <input asp-for="SelectedCompanyId" type="hidden" id="selectedCompanyIdHidden" />
+                    <input asp-for="CompanyCountryId" type="hidden" id="companyCountryIdHidden" />
+                    <input asp-for="CompanyCityId" type="hidden" id="companyCityIdHidden" />
+
+                    <!-- Seçilen firma göstergesi -->
+                    <div id="selectedCompanyBox" class="selected-company-box">
+                        <div>
+                            <div class="selected-company-title" id="selectedCompanyTitle"></div>
+                            <div class="selected-company-sub" id="selectedCompanySub"></div>
+                        </div>
+                        <button type="button" class="company-clear-btn" id="clearCompanyBtn" title="Temizle">
+                            <i class="bi bi-x-circle"></i>
+                        </button>
+                    </div>
+
+                    <div class="company-action-row">
+                        <button type="button" class="company-info-clear-btn" id="clearCompanyInfoBtn">
+                            <i class="bi bi-eraser me-1"></i> Bilgileri Temizle
+                        </button>
+                    </div>
+
+
+                    <!-- Firma detay alanları -->
+                    <div id="companyFieldsWrap" class="company-fields-wrap">
+                        <div class="row g-4 mt-1">
+                            <div class="col-md-6">
+                                <label asp-for="CompanyName" class="form-label">Firma Adı</label>
+
+                                <div class="company-search-wrap">
+                                    <input asp-for="CompanyName"
+                                           id="CompanyName"
+                                           class="form-control form-control-lg company-search-input"
+                                           placeholder="Firma adını yazın..."
+                                           autocomplete="off" />
+
+                                    <div id="companySuggestions" class="company-suggestions"></div>
+                                </div>
+
+                                <div class="company-info-note mt-1">
+                                    Firma adı yazıldıkça sistemde kayıtlı firmalar önerilir.
+                                </div>
+
+                                <span asp-validation-for="CompanyName" class="text-danger small"></span>
+                            </div>
+                            <div class="col-md-6" id="domesticCityWrap">
+                                <label class="form-label">Firma İli</label>
+                                <select id="domesticCitySelect" class="form-select form-select-lg">
+                                    <option value="">İl seçiniz...</option>
+                                    @foreach (var city in (IEnumerable<dynamic>)ViewBag.TurkeyCities)
+                                    {
+                                        <option value="@city.Id">@city.Name</option>
+                                    }
+                                </select>
+                                <div class="company-info-note mt-1">
+                                    Harita üzerinde görünmesi için firma ili seçilmelidir.
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label asp-for="CompanyRepresentative" class="form-label">Firma Yetkilisi</label>
+                                <input asp-for="CompanyRepresentative" id="CompanyRepresentative" class="form-control form-control-lg" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="CompanyEmail" class="form-label">Firma E-Posta</label>
+                                <input asp-for="CompanyEmail" id="CompanyEmail" class="form-control form-control-lg" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="CompanyPhone" class="form-label">Firma Telefon</label>
+                                <input asp-for="CompanyPhone" id="CompanyPhone" class="form-control form-control-lg" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="CompanyWebAddress" class="form-label">Web Adresi</label>
+                                <input asp-for="CompanyWebAddress" id="CompanyWebAddress" class="form-control form-control-lg" />
+                            </div>
+                            <div class="col-md-6">
+                                <label asp-for="CompanyTaxNumber" class="form-label">Vergi Numarası</label>
+                                <input asp-for="CompanyTaxNumber"
+                                       id="CompanyTaxNumber"
+                                       type="text"
+                                       maxlength="11"
+                                       inputmode="numeric"
+                                       class="form-control form-control-lg" />
+                            </div>
+                            <div class="col-12">
+                                <label asp-for="CompanyAddress" class="form-label">Firma Adresi</label>
+                                <textarea asp-for="CompanyAddress" id="CompanyAddress" class="form-control form-control-lg" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Staj Bilgileri -->
+                <div class="section-title">
+                    <span class="section-badge">2</span>
+                    Staj Bilgileri
+                </div>
+
+                <div class="soft-box">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <label asp-for="Position" class="form-label">Pozisyon</label>
+                            <input asp-for="Position" class="form-control form-control-lg" placeholder="Örn: Yazılım Geliştirme Stajyeri" />
+                            <span asp-validation-for="Position" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Types" class="form-label">Staj Türü</label>
+                            <select asp-for="Types" class="form-select form-select-lg" asp-items="ViewBag.InternshipTypes">
+                                <option value="">Staj Türü Seçiniz</option>
+                            </select>
+                            <span asp-validation-for="Types" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="StartDate" class="form-label">Başlangıç Tarihi</label>
+                            <input asp-for="StartDate" type="date" class="form-control form-control-lg" />
+                            <div class="mini-note">Tarih formatı: gg.aa.yyyy</div>
+                            <span asp-validation-for="StartDate" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="EndDate" class="form-label">Bitiş Tarihi</label>
+                            <input asp-for="EndDate" type="date" class="form-control form-control-lg" />
+                            <div class="mini-note">Tarih formatı: gg.aa.yyyy</div>
+                            <span asp-validation-for="EndDate" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="InternshipMentor" class="form-label">Firma Mentoru</label>
+                            <input asp-for="InternshipMentor" class="form-control form-control-lg" placeholder="Firma sorumlusunun adı soyadı" />
+                            <span asp-validation-for="InternshipMentor" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="InternshipMentorEmail" class="form-label">Mentor E-Posta</label>
+                            <input asp-for="InternshipMentorEmail" class="form-control form-control-lg" />
+                            <span asp-validation-for="InternshipMentorEmail" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="InternshipMentorPhone" class="form-label">Mentor Telefon</label>
+                            <input asp-for="InternshipMentorPhone" class="form-control form-control-lg" placeholder="05xx xxx xx xx" />
+                            <span asp-validation-for="InternshipMentorPhone" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12">
+                            <label asp-for="Description" class="form-label">Açıklama</label>
+                            <textarea asp-for="Description" class="form-control" rows="4"
+                                      placeholder="Staj süreci, görev beklentisi veya ek açıklamaları yazabilirsiniz."></textarea>
+                            <span asp-validation-for="Description" class="text-danger small"></span>
+                        </div>
+                        <div class="col-12">
+                            <div class="mini-note">
+                                <i class="bi bi-info-circle me-1"></i>
+                                Akademik danışman başvuru kaydından sonra sistem tarafından otomatik atanacaktır.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index" class="btn btn-light px-4 rounded-pill">Geri Dön</a>
+                    <button type="submit" class="btn btn-primary px-4">Başvuruyu Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.min.js"></script>
+
+    <script>
+        (function () {
+            var isDomestic = true;
+
+            var btnDomestic = document.getElementById('btnDomestic');
+            var btnAbroad = document.getElementById('btnAbroad');
+            var mapSection = document.getElementById('mapSection');
+            var abroadSelects = document.getElementById('abroadSelects');
+            var countrySelect = document.getElementById('countrySelect');
+            var citySelect = document.getElementById('citySelect');
+            var domesticCitySelect = document.getElementById('domesticCitySelect');
+            var domesticCityWrap = document.getElementById('domesticCityWrap');
+            var turkeyCountryId = '@ViewBag.TurkeyCountryId';
+
+            var companyNameInput = document.getElementById('CompanyName');
+            var companySuggestions = document.getElementById('companySuggestions');
+            var selectedIdHidden = document.getElementById('selectedCompanyIdHidden');
+            var countryIdHidden = document.getElementById('companyCountryIdHidden');
+            var cityIdHidden = document.getElementById('companyCityIdHidden');
+            var selectedBox = document.getElementById('selectedCompanyBox');
+            var selectedTitle = document.getElementById('selectedCompanyTitle');
+            var selectedSub = document.getElementById('selectedCompanySub');
+            var clearCompanyBtn = document.getElementById('clearCompanyBtn');
+            var fieldsWrap = document.getElementById('companyFieldsWrap');
+            var clearCompanyInfoBtn = document.getElementById('clearCompanyInfoBtn');
+
+
+            var searchTimeout = null;
+            var currentCityId = null;
+
+          if (domesticCitySelect) {
+                domesticCitySelect.addEventListener('change', function () {
+                    currentCityId = this.value || null;
+
+                    cityIdHidden.value = this.value || '';
+                    countryIdHidden.value = this.value ? turkeyCountryId : '';
+                });
+            }
+
+            // ── YURTİÇİ / YURTDIŞI ─────────────────────────────
+            btnDomestic.addEventListener('click', function () {
+
+                isDomestic = true;
+
+                btnDomestic.classList.add('active');
+                btnAbroad.classList.remove('active');
+
+                mapSection.style.display = 'block';
+                abroadSelects.style.display = 'none';
+
+                if (domesticCityWrap) {
+                    domesticCityWrap.style.display = 'block';
+                }
+
+
+                currentCityId = null;
+                cityIdHidden.value = '';
+                countryIdHidden.value = '';
+
+                clearCompany();
+
+                setTimeout(function () {
+                    if (leafMap) {
+                        leafMap.invalidateSize();
+                    }
+                }, 200);
+            });
+
+            btnAbroad.addEventListener('click', function () {
+                isDomestic = false;
+
+                btnAbroad.classList.add('active');
+                btnDomestic.classList.remove('active');
+
+                mapSection.style.display = 'none';
+                abroadSelects.style.display = 'block';
+
+                if (domesticCityWrap) {
+                    domesticCityWrap.style.display = 'none';
+                }
+
+                currentCityId = null;
+                cityIdHidden.value = '';
+                countryIdHidden.value = '';
+
+                clearCompany();
+            });
+
+            // ── HARİTA ──────────────────────────────────────────
+            var mapData = [];
+            var cityDataMap = {};
+            var leafMap = null;
+            var geojsonLayer = null;
+            var selectedLayer = null;
+            var cityLabelLayer = null;
+
+            function cityKey(value) {
+                return (value || '')
+                    .toLocaleLowerCase('tr-TR')
+                    .replace(/\s+/g, ' ')
+                    .trim();
+            }
+
+            function getFeatureCityName(feature) {
+                var p = feature.properties || {};
+
+                return p.name ||
+                    p.Name ||
+                    p.NAME ||
+                    p.NAME_1 ||
+                    p.il_adi ||
+                    p.ilAdi ||
+                    p.city ||
+                    p.City ||
+                    p.province ||
+                    p.Province ||
+                    '';
+            }
+
+            function getCityInfoByName(cityName) {
+                return cityDataMap[cityKey(cityName)];
+            }
+
+            function getTotalInternshipCount(data) {
+                if (!data || !data.companies) return 0;
+
+                return data.companies.reduce(function (total, company) {
+                    return total + (company.internshipCount || 0);
+                }, 0);
+            }
+
+            leafMap = L.map('turkeyMap', {
+                center: [39.0, 35.5],
+                zoom: 6,
+                minZoom: 5,
+                maxZoom: 9,
+                zoomControl: true,
+                scrollWheelZoom: false,
+                attributionControl: false
+            });
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png', {
+                maxZoom: 12
+            }).addTo(leafMap);
+            cityLabelLayer = L.layerGroup().addTo(leafMap);
+
+            function styleProvince(feature) {
+                var name = getFeatureCityName(feature);
+                var data = getCityInfoByName(name);
+                var total = getTotalInternshipCount(data);
+                var hasData = total > 0;
+
+                return {
+                    fillColor: hasData ? '#3b82f6' : '#dbeafe',
+                    weight: 1,
+                    opacity: 1,
+                    color: '#ffffff',
+                    fillOpacity: hasData ? 0.75 : 0.45
+                };
+            }
+
+            function onProvinceClick(e) {
+                if (selectedLayer) {
+                    geojsonLayer.resetStyle(selectedLayer);
+                }
+
+                selectedLayer = e.target;
+
+                selectedLayer.setStyle({
+                    fillColor: '#1e40af',
+                    fillOpacity: 1,
+                    weight: 2,
+                    color: '#ffffff'
+                });
+
+                var cityName = getFeatureCityName(e.target.feature);
+                var cityInfo = getCityInfoByName(cityName);
+
+                currentCityId = cityInfo ? cityInfo.cityId : null;
+                cityIdHidden.value = currentCityId || '';
+                countryIdHidden.value = cityInfo && cityInfo.countryId ? cityInfo.countryId : '';
+
+                if (domesticCitySelect && currentCityId) {
+                     domesticCitySelect.value = currentCityId;
+                }
+
+                showMapSidebar(cityName, cityInfo);
+            }
+
+                    function loadMap() {
+            fetch('/data/tr-cities.json')
+                .then(function (r) {
+                    if (!r.ok) {
+                        throw new Error('GeoJSON dosyası yüklenemedi.');
+                    }
+
+                    return r.json();
+                })
+                .then(function (geoData) {
+                    if (geojsonLayer) {
+                        geojsonLayer.remove();
+                    }
+
+                    if (cityLabelLayer) {
+                        cityLabelLayer.clearLayers();
+                    }
+
+                    geojsonLayer = L.geoJSON(geoData, {
+                        style: styleProvince,
+
+                        onEachFeature: function (feature, layer) {
+                            var cityName = getFeatureCityName(feature);
+                            var cityInfo = getCityInfoByName(cityName);
+                            var totalInternships = getTotalInternshipCount(cityInfo);
+                            var companyCount = cityInfo && cityInfo.companies
+                                ? cityInfo.companies.length
+                                : 0;
+
+                            layer.on({
+                                mouseover: function (e) {
+                                    e.target.setStyle({
+                                        weight: 2,
+                                        color: '#1d4ed8',
+                                        fillOpacity: 0.9
+                                    });
+
+                                    e.target.bringToFront();
+                                },
+
+                                mouseout: function (e) {
+                                    if (selectedLayer !== e.target) {
+                                        geojsonLayer.resetStyle(e.target);
+                                    }
+                                },
+
+                                click: onProvinceClick
+                            });
+
+                            // Hover üzerinde şehir adı YOK.
+                            // Sadece öğrencinin bölümüne uygun firma/staj bilgisi var.
+                            var tooltipText = totalInternships > 0
+                                ? companyCount + ' uygun firma<br>' +
+                                  totalInternships + ' kabul alan öğrenci'
+                                : 'Uygun firma yok';
+
+                            layer.bindTooltip(tooltipText, {
+                                sticky: true,
+                                permanent: false,
+                                className: 'leaflet-city-tooltip',
+                                direction: 'top'
+                            });
+                        }
+                    }).addTo(leafMap);
+
+                    leafMap.fitBounds(geojsonLayer.getBounds(), {
+                        padding: [12, 12]
+                    });
+
+                    // Şehir isimlerini haritanın üzerine kalıcı olarak yazdırır.
+                    geojsonLayer.eachLayer(function (layer) {
+                        var cityName = getFeatureCityName(layer.feature);
+
+                        if (!cityName) return;
+
+                        var center = layer.getBounds().getCenter();
+
+                        L.marker(center, {
+                            interactive: false,
+                            icon: L.divIcon({
+                                className: 'city-label',
+                                html: '<div class="city-label-inner">' + cityName + '</div>',
+                                iconSize: [80, 24],
+                                iconAnchor: [40, 12]
+                            })
+                        }).addTo(cityLabelLayer);
+                    });
+
+                    setTimeout(function () {
+                        leafMap.invalidateSize();
+                    }, 200);
+                })
+                .catch(function (e) {
+                    console.error('GeoJSON yüklenemedi:', e);
+                });
+        }
+
+            fetch('/Internship/GetMapData')
+                .then(function (r) {
+                    return r.json();
+                })
+                .then(function (data) {
+                    mapData = data || [];
+
+                    mapData.forEach(function (d) {
+                        cityDataMap[cityKey(d.cityName)] = d;
+                    });
+
+                    loadMap();
+                })
+                .catch(function () {
+                    loadMap();
+                });
+
+            function showMapSidebar(cityName, data) {
+                document.getElementById('sidebarCityName').textContent = cityName;
+                var body = document.getElementById('sidebarCityBody');
+
+                if (!data || !data.companies || data.companies.length === 0) {
+                    document.getElementById('sidebarCityCount').textContent = 'Kayıtlı staj yok';
+
+                    body.innerHTML =
+                        '<div class="map-empty-msg">' +
+                        '<i class="bi bi-building-x d-block mb-2" style="font-size:2rem;color:#cbd5e1;"></i>' +
+                        'Bu ilde kayıtlı staj bulunmuyor.' +
+                        '</div>';
+
+                    return;
+                }
+
+                var total = getTotalInternshipCount(data);
+
+                document.getElementById('sidebarCityCount').textContent =
+                    data.companies.length + ' firma · ' + total + ' kabul alan öğrenci';
+
+                var sorted = data.companies.slice().sort(function (a, b) {
+                    return (b.internshipCount || 0) - (a.internshipCount || 0);
+                });
+
+                var html = '';
+
+                sorted.forEach(function (c) {
+                    html +=
+                        '<div class="company-map-entry" data-id="' + c.id + '">' +
+                        '<div class="company-map-name">' + c.name + '</div>' +
+                        '<div class="company-map-count">' + c.internshipCount + ' kabul alan öğrenci</div>' +
+                        '</div>';
+                });
+
+                body.innerHTML = html;
+
+                body.querySelectorAll('.company-map-entry').forEach(function (el) {
+                    el.addEventListener('click', function () {
+                        selectCompanyById(this.dataset.id, cityName);
+
+                        document.querySelector('.main-card')
+                            .scrollIntoView({
+                                behavior: 'smooth',
+                                block: 'start'
+                            });
+                    });
+                });
+            }
+
+            // ── FİRMA ADI YAZILIRKEN OTOMATİK ÖNERİ ─────────────
+                                 companyNameInput.addEventListener('input', function () {
+            clearTimeout(searchTimeout);
+
+            var val = this.value.trim();
+
+            selectedIdHidden.value = '';
+            document.getElementById('CompanyName').value = val;
+
+           if (!selectedIdHidden.value) {
+                 document.getElementById('CompanyName').value = val;
+                }
+
+
+            if (val.length < 2) {
+                companySuggestions.style.display = 'none';
+                companySuggestions.innerHTML = '';
+                return;
+            }
+
+            searchTimeout = setTimeout(function () {
+                var cityParam = currentCityId ? '&cityId=' + currentCityId : '';
+
+                fetch('/Internship/SearchCompanies?name=' + encodeURIComponent(val))
+                    .then(function (r) {
+                        return r.json();
+                    })
+                    .then(function (data) {
+                        renderCompanySuggestions(data || [], val);
+                    })
+                    .catch(function (e) {
+                        console.error('Firma önerileri getirilemedi:', e);
+                        companySuggestions.style.display = 'none';
+                        companySuggestions.innerHTML = '';
+                    });
+            }, 300);
+        });
+
+            // Dışarı tıklayınca öneri kutusunu kapat
+            document.addEventListener('click', function (e) {
+                if (!companyNameInput.contains(e.target) && !companySuggestions.contains(e.target)) {
+                    companySuggestions.style.display = 'none';
+                }
+            });
+
+                    function escapeHtml(value) {
+            return String(value || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+                function renderCompanySuggestions(data, typedName) {
+            var html = '';
+
+            if (!data || data.length === 0) {
+                html =
+                    '<div class="suggestion-empty">' +
+                        '<div class="suggestion-empty-title">Bu firma sistemde kayıtlı değil.</div>' +
+                        '<div class="suggestion-empty-sub">Yeni firma olarak aşağıdaki bilgileri doldurabilirsiniz.</div>' +
+                    '</div>';
+
+                companySuggestions.innerHTML = html;
+                companySuggestions.style.display = 'block';
+                return;
+            }
+
+            data.forEach(function (c) {
+                var locationText = '';
+
+                if (c.city) {
+                    locationText += c.city;
+                }
+
+                if (c.country) {
+                    locationText += locationText ? ' · ' + c.country : c.country;
+                }
+
+                if (c.email) {
+                    locationText += locationText ? ' · ' + c.email : c.email;
+                }
+
+                html +=
+                    '<div class="suggestion-item" data-id="' + c.id + '">' +
+                        '<div class="suggestion-main">' +
+                            '<div class="suggestion-name">' + escapeHtml(c.name) + '</div>' +
+                            '<div class="suggestion-meta">' + escapeHtml(locationText || 'Kayıtlı firma') + '</div>' +
+                        '</div>' +
+                        '<div class="suggestion-select-text">Seç</div>' +
+                    '</div>';
+            });
+
+            companySuggestions.innerHTML = html;
+            companySuggestions.style.display = 'block';
+
+            companySuggestions.querySelectorAll('.suggestion-item[data-id]').forEach(function (el) {
+                el.addEventListener('click', function () {
+                    selectCompanyById(this.dataset.id, null);
+                    companySuggestions.style.display = 'none';
+                });
+            });
+        }
+
+                   function selectCompanyById(id, cityHint) {
+            fetch('/Internship/GetCompanyInfo?id=' + id)
+                .then(function (r) {
+                    return r.json();
+                })
+                .then(function (data) {
+                    selectedIdHidden.value = data.id;
+
+                    countryIdHidden.value = data.countryId || '';
+                    cityIdHidden.value = data.cityId || '';
+                    currentCityId = data.cityId || currentCityId;
+
+                    if (domesticCitySelect && data.cityId) {
+                        domesticCitySelect.value = data.cityId;
+                    }
+
+                    selectedTitle.textContent = data.name;
+
+                    selectedSub.textContent = cityHint
+                        ? cityHint + ' · Kayıtlı firma'
+                        : ((data.city || '') + (data.country ? ' · ' + data.country : ''));
+
+                    selectedBox.classList.add('show');
+
+                    fillFields(data);
+
+                    companySuggestions.style.display = 'none';
+                    companySuggestions.innerHTML = '';
+                })
+                .catch(function (e) {
+                    console.error('Firma bilgisi getirilemedi:', e);
+                });
+        }
+
+            clearCompanyBtn.addEventListener('click', function () {
+                clearCompany();
+            });
+
+                    if (clearCompanyInfoBtn) {
+            clearCompanyInfoBtn.addEventListener('click', function () {
+                clearCompany();
+            });
+        }
+
+            function clearCompany() {
+                selectedIdHidden.value = '';
+
+                selectedBox.classList.remove('show');
+
+                clearFields();
+
+                companySuggestions.style.display = 'none';
+                companySuggestions.innerHTML = '';
+            }
+
+            function fillFields(data) {
+                document.getElementById('CompanyName').value = data.name || '';
+                document.getElementById('CompanyAddress').value = data.address || '';
+                document.getElementById('CompanyPhone').value = data.phone || '';
+                document.getElementById('CompanyEmail').value = data.email || '';
+                document.getElementById('CompanyRepresentative').value = data.companyRepresentative || '';
+                document.getElementById('CompanyWebAddress').value = data.webAddress || '';
+                document.getElementById('CompanyTaxNumber').value = data.taxNumber || '';
+            }
+
+            function clearFields() {
+                [
+                    'CompanyName',
+                    'CompanyAddress',
+                    'CompanyPhone',
+                    'CompanyEmail',
+                    'CompanyRepresentative',
+                    'CompanyWebAddress',
+                    'CompanyTaxNumber'
+                ].forEach(function (id) {
+                    var el = document.getElementById(id);
+
+                    if (el) {
+                        el.value = '';
+                    }
+                });
+            }
+
+            // ── YURT DIŞI DROPDOWN ──────────────────────────────
+            countrySelect.addEventListener('change', function () {
+                var countryId = this.value;
+
+                citySelect.innerHTML = '<option value="">Yükleniyor...</option>';
+                citySelect.disabled = true;
+
+                countryIdHidden.value = countryId;
+                cityIdHidden.value = '';
+                currentCityId = null;
+
+                clearCompany();
+
+                if (!countryId) {
+                    citySelect.innerHTML = '<option value="">Önce ülke seçin...</option>';
+                    citySelect.disabled = true;
+                    return;
+                }
+
+                fetch('/Internship/GetCitiesByCountry?countryId=' + countryId)
+                    .then(function (r) {
+                        return r.json();
+                    })
+                    .then(function (data) {
+                        citySelect.innerHTML = '<option value="">Şehir seçiniz...</option>';
+
+                        data.forEach(function (c) {
+                            var opt = document.createElement('option');
+                            opt.value = c.id;
+                            opt.textContent = c.name;
+                            citySelect.appendChild(opt);
+                        });
+
+                        citySelect.disabled = false;
+                    })
+                    .catch(function (e) {
+                        console.error('Şehirler getirilemedi:', e);
+                        citySelect.innerHTML = '<option value="">Şehirler yüklenemedi</option>';
+                        citySelect.disabled = true;
+                    });
+            });
+
+            citySelect.addEventListener('change', function () {
+                currentCityId = this.value;
+                cityIdHidden.value = this.value;
+
+                clearCompany();
+            });
+
+        })();
+    </script>
+}

@@ -1,0 +1,50 @@
+﻿@model WebTabanliStajTakipSistemi.ViewModels.DepartmentCreateViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Create Test</title>
+</head>
+<body>
+    <h1 style="background:red;color:white;padding:10px;">DEPARTMENT CREATE TEST</h1>
+
+    <p><strong>Liste sayısı:</strong> @(Model?.Universities?.Count ?? -1)</p>
+
+    @if (Model?.Universities != null && Model.Universities.Any())
+    {
+        <ul>
+            @foreach (var item in Model.Universities)
+            {
+                <li>@item.Value - @item.Text</li>
+            }
+        </ul>
+    }
+    else
+    {
+        <p>Liste boş geldi.</p>
+    }
+
+    <form asp-action="Create" method="post">
+        @Html.AntiForgeryToken()
+
+        <div>
+            <label asp-for="Name">Bölüm Adı</label>
+            <input asp-for="Name" />
+        </div>
+
+        <div>
+            <label asp-for="UniversityId">Üniversite</label>
+            <select asp-for="UniversityId">
+                <option value="">-- Üniversite Seçiniz --</option>
+                @foreach (var item in Model.Universities)
+                {
+                    <option value="@item.Value">@item.Text</option>
+                }
+            </select>
+        </div>
+
+        <button type="submit">Kaydet</button>
+    </form>
+</body>
+</html>

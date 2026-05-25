@@ -1,0 +1,173 @@
+﻿@model IEnumerable<WebTabanliStajTakipSistemi.Models.Admin>
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Yönetici Listesi";
+}
+
+<style>
+    .search-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    .search-input {
+        width: 0;
+        height: 40px;
+        padding: 0;
+        padding-left: 10px;
+        border: 1px solid transparent;
+        border-radius: 20px;
+        outline: none;
+        transition: all 0.4s ease;
+        opacity: 0;
+        cursor: pointer;
+    }
+
+        .search-input.active {
+            width: 250px;
+            padding-left: 40px;
+            padding-right: 15px;
+            opacity: 1;
+            border-color: #ef4444; /* Adminler için kırmızı tonu */
+            cursor: text;
+        }
+
+    .search-btn {
+        width: 40px;
+        height: 40px;
+        background: #fff;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: all 0.4s ease;
+        position: absolute;
+        right: 0;
+        z-index: 10;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        border: 1px solid #e5e7eb;
+    }
+
+        .search-btn.active {
+            right: 215px;
+            background: transparent;
+            border-color: transparent;
+            box-shadow: none;
+        }
+
+        .search-btn i {
+            font-size: 1.2rem;
+            color: #ef4444;
+        }
+</style>
+
+<div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+    <div class="card-header bg-white py-4 px-4 border-0">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <h4 class="m-0 fw-bold text-dark"><i class="bi bi-shield-lock me-2 text-danger"></i> Sistem Yöneticileri</h4>
+                <p class="text-muted small mb-0">Toplam <strong id="adminCount">@Model.Count()</strong> yönetici yetkisine sahip kullanıcı bulunuyor.</p>
+            </div>
+            <div class="col-md-6 d-flex justify-content-md-end mt-3 mt-md-0">
+                <div class="search-wrapper">
+                    <div class="search-btn" id="searchBtn">
+                        <i class="bi bi-search"></i>
+                    </div>
+                    <input type="text" id="liveSearch" class="search-input" placeholder="Yönetici ara...">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0" id="adminTable">
+                <thead class="bg-light">
+                    <tr class="text-muted small text-uppercase">
+                        <th class="ps-4">Admin ID</th>
+                        <th>Ad Soyad</th>
+                        <th>E-Posta</th>
+                        <th class="text-center">İşlem</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr class="admin-row">
+                            <td class="ps-4 small text-muted">#@item.Id</td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <div class="rounded-circle bg-danger bg-opacity-10 text-danger p-2 me-2 d-none d-md-block" style="width: 35px; height: 35px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold;">
+                                        @(string.IsNullOrEmpty(item.FullName) ? "?" : item.FullName.Substring(0, 1).ToUpper())
+                                    </div>
+                                    <div class="fw-bold">@item.FullName</div>
+                                </div>
+                            </td>
+                            <td class="text-muted">@item.Email</td>
+                            <td class="text-center">
+                                <div class="btn-group">
+                                    <form asp-action="DeleteUser" asp-route-id="@item.Id" asp-route-type="Admin" method="post"
+                                          onsubmit="return confirm('Bu yönetici hesabını silmek istediğinize emin misiniz?')">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger border-0 rounded-pill px-3">
+                                            <i class="bi bi-trash3 me-1"></i> Kaldır
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div id="noResult" class="text-center py-5 d-none">
+            <i class="bi bi-shield-exclamation text-muted display-1"></i>
+            <p class="mt-3 text-muted">Aranan kriterlerde yönetici bulunamadı.</p>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            const searchBtn = $('#searchBtn');
+            const searchInput = $('#liveSearch');
+
+            searchBtn.on('click', function () {
+                searchBtn.toggleClass('active');
+                searchInput.toggleClass('active');
+                if (searchInput.hasClass('active')) {
+                    searchInput.focus();
+                } else {
+                    searchInput.val('');
+                    filterTable('');
+                }
+            });
+
+            searchInput.on('keyup', function () {
+                const value = $(this).val().toLowerCase();
+                filterTable(value);
+            });
+
+            function filterTable(value) {
+                let visibleCount = 0;
+                $(".admin-row").filter(function () {
+                    const match = $(this).text().toLowerCase().indexOf(value) > -1;
+                    $(this).toggle(match);
+                    if (match) visibleCount++;
+                });
+
+                $("#adminCount").text(visibleCount);
+                if (visibleCount === 0) {
+                    $("#adminTable").addClass('d-none');
+                    $("#noResult").removeClass('d-none');
+                } else {
+                    $("#adminTable").removeClass('d-none');
+                    $("#noResult").addClass('d-none');
+                }
+            }
+        });
+    </script>
+}
